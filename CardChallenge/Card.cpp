@@ -1,6 +1,6 @@
 #include "Card.h"
 #include <iostream>     // cout
-#include <algorithm>    // foreach
+#include <algorithm>    // foreach, shuffle
 #include <stdexcept>    // range_error
 
 /** Table to print card colors
@@ -16,16 +16,16 @@ static const char* colorTable[COLOR + 1] {
 /** Table ot print card values
  */
 static const char* valueTable[VALUE + 1] {
-    "One",
-    "Two",
-    "Three",
-    "Four",
-    "Five",
-    "Six",
-    "Seven",
-    "Eight",
-    "Nine",
-    "Ten",
+    "Ace",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
     "Jack",
     "Queen",
     "King",
@@ -108,3 +108,8 @@ const Deck& Deck::print(size_t index) const
     return *this;
 }
 
+Deck& Deck::shuffle(void) noexcept
+{
+    std::random_shuffle(deck.begin(), deck.end());
+    return *this;
+}

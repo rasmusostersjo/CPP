@@ -19,7 +19,7 @@ OBJ = $(SRC:.cpp=.o)
 HEADER = $(wildcard *.h)
 
 # Executable name
-EXE = CardChallenge
+EXE = Main
 
 # Build program
 $(EXE): $(OBJ) $(HEADER)

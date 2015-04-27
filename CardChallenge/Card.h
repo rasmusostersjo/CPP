@@ -108,6 +108,14 @@ public:
      */
     Deck(size_t n = DEFAULT_DECK_SIZE);
 
+    /** Use the compiler defaults
+     */
+    Deck(const Deck&)            = default;
+    Deck(Deck&&)                 = default;
+    ~Deck(void)                  = default;
+    Deck& operator=(const Deck&) = default;
+    Deck& operator=(Deck&&)      = default;
+
     /** print; prints the entire deck.
      *
      * @return          Constant reference to this object.
@@ -123,13 +131,11 @@ public:
      */
     const Deck& print(size_t i) const;
 
-    /** Use the compiler defaults
+    /** shuffle; shuffles the entire deck.
+     *
+     * @return          Reference to this object.
      */
-    Deck(const Deck&)            = default;
-    Deck(Deck&&)                 = default;
-    ~Deck(void)                  = default;
-    Deck& operator=(const Deck&) = default;
-    Deck& operator=(Deck&&)      = default;
+    Deck& shuffle(void) noexcept;
 
 private:
     
