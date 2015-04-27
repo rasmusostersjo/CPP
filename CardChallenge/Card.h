@@ -3,7 +3,7 @@
 
 /** Data type for a cards value
  */
-enum Value{
+typedef enum {
     ACE,
     TWO,
     THREE,
@@ -19,17 +19,17 @@ enum Value{
     KING,
     JOKER,
     VALUE
-};
+} Value;
 
 /** Data type for a cards color
  */
-enum Color{
+typedef enum {
     HEARTS,
     CLUBS,
     SPADES,
     DIAMONDS,
     COLOR
-};
+} Color;
 
 class Card {
 public:
@@ -49,6 +49,38 @@ public:
     ~Card(void)                  = default;
     Card& operator=(const Card&) = default;
     Card& operator=(Card&&)      = default;
+
+    /** viewCard; Prints card information to stdin
+     *
+     * @return      Constant reference to this object.
+     */
+    const Card& view(void) const noexcept;
+
+    /** getColor
+     *
+     * @return      The color of this card.
+     */
+    const Color& getColor(void) const noexcept;
+
+    /** getValue
+     *
+     * @return      The value of this card.
+     */
+    const Value& getValue(void) const noexcept;
+    
+    /** setColor
+     *
+     * @param c     Color to assign to this card.
+     * @return      Constant reference to this object.
+     */
+    const Card& setColor(const Color& c) noexcept;
+
+    /** setValue
+     *
+     * @param v     Value to assign to this card.
+     * @return      Constant reference to this object.
+     */
+    const Card& setValue(const Value& v) noexcept;
     
 private:
 

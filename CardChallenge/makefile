@@ -29,6 +29,10 @@ $(EXE): $(OBJ) $(HEADER)
 %.o: %.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
+# Test run EXE
+test:  $(EXE)
+	./$(EXE) 
+
 # Clean up all EXE
 clean:
 	rm -rf *.o
