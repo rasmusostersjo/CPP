@@ -1,5 +1,7 @@
 #include "Card.h"
 #include <iostream>     // cout
+#include <algorithm>    // foreach
+#include <stdexcept>    // range_error
 
 /** Table to print card colors
  */
@@ -30,6 +32,8 @@ static const char* valueTable[VALUE + 1] {
     "Joker",
     "" /* No value */
 };
+
+///////////////////////////// Card /////////////////////////////////////////////
 
 Card::Card(void)
     : color(COLOR), value(JOKER)
@@ -68,3 +72,39 @@ const Card& Card::setValue(const Value& v) noexcept
     value = v;
     return *this;
 }
+
+///////////////////////////// Deck /////////////////////////////////////////////
+
+Deck::Deck(size_t n)
+    : deck(n)
+{
+    Value v = ACE;
+    Color c = HEARTS;
+
+    std::for_each(deck.begin(), deck.end(), [&v, &c](Card& k) {
+
+        // Initialize card
+        k.setValue(v);
+        k.setColor(c);
+
+        // Increment value and color in cycles; dont assign jokers
+        if ( (v = Value((v + 1) % (VALUE - 1))) == 0 )
+            c = Color( (c + 1) % COLOR );
+    });
+}
+
+const Deck& Deck::print(void) const noexcept
+{
+    std::for_each(deck.begin(), deck.end(), [](Card k) { k.view(); });
+    return *this;
+}
+
+const Deck& Deck::print(size_t index) const
+{
+    if (index >= deck.size())
+        throw std::range_error("Error: Deck::print");
+
+    deck[index].view();
+    return *this;
+}
+

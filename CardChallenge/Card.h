@@ -1,6 +1,12 @@
 #ifndef CARD_H
 #define CARD_H
 
+// Libraries
+#include <cstddef>          // size_t
+#include <vector>           // vector
+#include <iterator>         // vector::iterator
+#include "DefaultValues.h"
+
 /** Data type for a cards value
  */
 typedef enum {
@@ -50,35 +56,35 @@ public:
     Card& operator=(const Card&) = default;
     Card& operator=(Card&&)      = default;
 
-    /** viewCard; Prints card information to stdin
+    /** view; Prints card information to stdin
      *
-     * @return      Constant reference to this object.
+     * @return          Constant reference to this object.
      */
     const Card& view(void) const noexcept;
 
     /** getColor
      *
-     * @return      The color of this card.
+     * @return          The color of this card.
      */
     const Color& getColor(void) const noexcept;
 
     /** getValue
      *
-     * @return      The value of this card.
+     * @return          The value of this card.
      */
     const Value& getValue(void) const noexcept;
     
     /** setColor
      *
-     * @param c     Color to assign to this card.
-     * @return      Constant reference to this object.
+     * @param c         Color to assign to this card.
+     * @return          Constant reference to this object.
      */
     const Card& setColor(const Color& c) noexcept;
 
     /** setValue
      *
-     * @param v     Value to assign to this card.
-     * @return      Constant reference to this object.
+     * @param v         Value to assign to this card.
+     * @return          Constant reference to this object.
      */
     const Card& setValue(const Value& v) noexcept;
     
@@ -86,6 +92,50 @@ private:
 
     Color color;
     Value value;
+};
+
+class Deck
+{
+public:
+    
+    /** Default constructur
+     * Intialized the deck with n cards. First Ace-King hearts are added,
+     * then clubs, diamonds and spades. Thus, if less or more cards than the
+     * amount of distinct cards are requested there may be missing cards or
+     * multiple instances.
+     *
+     * @param n         Amount of cards to assign the deck.
+     */
+    Deck(size_t n = DEFAULT_DECK_SIZE);
+
+    /** print; prints the entire deck.
+     *
+     * @return          Constant reference to this object.
+     */
+    const Deck& print(void) const noexcept;
+
+    /** print; prints the card specified by i.
+     *
+     * @param i         Index of the deck card to print.
+     * @return          Constant reference to this object.
+     *
+     * @range_error     Generated if i is larger than the deck size.
+     */
+    const Deck& print(size_t i) const;
+
+    /** Use the compiler defaults
+     */
+    Deck(const Deck&)            = default;
+    Deck(Deck&&)                 = default;
+    ~Deck(void)                  = default;
+    Deck& operator=(const Deck&) = default;
+    Deck& operator=(Deck&&)      = default;
+
+private:
+    
+    /** Let the deck be a vector of cards
+     */
+    std::vector<Card> deck;
 };
 
 #endif // CARD_H
