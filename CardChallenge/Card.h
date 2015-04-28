@@ -79,14 +79,18 @@ public:
      * @param c         Color to assign to this card.
      * @return          Constant reference to this object.
      */
-    const Card& setColor(const Color& c) noexcept;
+    Card& setColor(const Color& c) noexcept;
 
     /** setValue
      *
      * @param v         Value to assign to this card.
      * @return          Constant reference to this object.
      */
-    const Card& setValue(const Value& v) noexcept;
+    Card& setValue(const Value& v) noexcept;
+
+    /** Equal to operator
+     */
+    bool operator==(const Card& c);
     
 private:
 
@@ -136,7 +140,7 @@ public:
      * @param i         Index of a the card to get; index from 0, 1, ...
      * @return          The card indexed by i.
      */
-    const Card& getCard(size_t i) const;
+    Card& getCard(size_t i);
 
     /** shuffle; shuffles the entire deck.
      *
