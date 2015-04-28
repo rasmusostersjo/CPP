@@ -61,16 +61,21 @@ const Value& Card::getValue(void) const noexcept
     return value;
 }
 
-const Card& Card::setColor(const Color& c) noexcept
+Card& Card::setColor(const Color& c) noexcept
 {
     color = c;
     return *this;
 }
 
-const Card& Card::setValue(const Value& v) noexcept
+Card& Card::setValue(const Value& v) noexcept
 {
     value = v;
     return *this;
+}
+
+bool Card::operator==(const Card& c)
+{
+    return color == c.color && value == c.value;
 }
 
 ///////////////////////////// Deck /////////////////////////////////////////////
@@ -108,7 +113,7 @@ const Deck& Deck::print(size_t index) const
     return *this;
 }
 
-const Card& Deck::getCard(size_t index) const
+Card& Deck::getCard(size_t index)
 {
     if (index >= deck.size())
         throw std::range_error("Error: Deck::getCard");
