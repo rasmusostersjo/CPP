@@ -51,61 +51,132 @@ static Value transformValue(const std::string& v)
     return JOKER; // invalid
 }
 
-static bool updateScore(const Card& c, Color color, Value value)
+/** yes_no
+ * Lets the user enter yes (y, Y) or no (n, N).
+ * 
+ * @return          1 to signal yes; else 0.
+ */
+static bool yes_no(void)
 {
-    return c.getColor() == color && c.getValue() == value;
-}
+    int c;
 
-size_t computeScore(std::vector<bool> s)
-{
-    size_t score = 0;
-    std::for_each(s.begin(), s.end(), [&score](bool b) { if (b) ++score; } );
-    return score;
+    while ((c = std::cin.get()) != 'y' && c != 'Y' && c != 'n' && c != 'N')
+        ;
+    readENTER(); 
+
+    return (c == 'y' || c == 'Y')? 1 : 0;
 }
 
 //////////////////////////// CardChallenge ////////////////////////////////////
 
 CardChallenge::CardChallenge(size_t lv)
-    : deck(lv)
+    : deck(lv), scoreDeck(lv)
 {
-    deck.shuffle();
+    // Initialliy scoreDeck contains only jokers
+    for (size_t i = 0; i < scoreDeck.size(); ++i)
+        scoreDeck.getCard(i).setColor(COLOR).setValue(JOKER);
 }
 
-const CardChallenge& CardChallenge::play(void) const noexcept
+CardChallenge& CardChallenge::shuffle(void) noexcept
 {
-    std::vector<bool> score(deck.size());
+    deck.shuffle();
+    return *this;
+}
 
-    std::cout << "Card Challenge started; Press ENTER to continue.";
-    readENTER();
-    clearScreen();
-
-    // View the entire deck
+const CardChallenge& CardChallenge::view(void) const noexcept
+{
     for (size_t i = 0; i < deck.size(); ++i) {
         deck.print(i);
         readENTER();
         clearScreen();
     }
-    
-    std::cout << "State the cards in the right order! (<c> <v>)" << std::endl;
-    for (size_t i = 0; i < deck.size(); ++i) {
-        std::string c, v;
-        Color color;
-        Value value;
 
-        // State next card
-        std::cout << "State card " << i + 1 << ": ";
-        std::cin  >> c >> v;
+    return *this;
+}
 
-        // Update score
-        color = transformColor(c);
-        value = transformValue(v);
-        score[i] = updateScore(deck.getCard(i), color, value);
-    }
+const CardChallenge& CardChallenge::view(size_t i) const
+{
+    if (i >= deck.size())
+        throw std::range_error("Error: CardChallenge::view");
 
-    // Show results
-    std::string ans;
-    std::cout << std::endl << "\tYour score: " << computeScore(score) << "/"
-              << deck.size() << std::endl << std::endl;
+    deck.print(i);
+    readENTER();
+    clearScreen();
+
+    return *this;
+}
+
+CardChallenge& CardChallenge::stateCard(size_t i)
+{
+    std::string c, v;
+    Color color;
+    Value value;
+
+    if (i >= deck.size())
+        throw std::range_error("Error: CardChallenge::stateCard");
+
+    std::cout << "State card " << i + 1 << ": ";
+    std::cin  >> c >> v;
+
+    // Update scoreDeck
+    color = transformColor(c);
+    value = transformValue(v);
+    scoreDeck.getCard(i).setColor(color).setValue(value);
+
+    return *this;
+}
+
+size_t CardChallenge::computeScore(void) noexcept
+{
+    size_t s = 0;
+    size_t n = deck.size() < scoreDeck.size() ? deck.size() : scoreDeck.size();
+
+    for (size_t i = 0; i < n; ++i)
+        if (deck.getCard(i) == scoreDeck.getCard(i))
+            ++s;
+
+    return s;
+}
+
+CardChallenge& CardChallenge::play(void) noexcept
+{
+    std::cout << "Press ENTER to start.";
+    readENTER();
+    clearScreen();
+
+    // Let user view all cards once
+    view();
+
+    // let user re state all cards
+    for (size_t i = 0; i < deck.size(); ++i)
+        stateCard(i);
+
+    // Let user re state cards by index
+    std::cout << std::endl << "Do you want to re state any card? (y/n) ";
+    bool reState;
+    do {
+        size_t card_i;
+
+        if ( (reState = yes_no()) ) {
+            std::cout << "Enter which card to restate: ";
+            std::cin >> card_i;
+            try {
+                stateCard(card_i - 1);  // stateCard index from 0
+            }
+            catch (std::range_error) {
+                std::cerr << "Invalid card index." << std::endl;
+            }
+            std::cout << "Do you want to re state any other card? (y/n) ";
+        }
+
+    } while(reState);
+
+    // Print results
+    std::cout << std::endl << "\tYour score: " << computeScore() << "/"
+              << deck.size() << std::endl << std::endl
+              << "Do you want to reveal the entire solution? (y/n) ";
+    if (yes_no())
+        deck.print();
 
     return *this;
 }
