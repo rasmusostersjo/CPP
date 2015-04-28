@@ -131,11 +131,24 @@ public:
      */
     const Deck& print(size_t i) const;
 
+    /** getCard
+     *
+     * @param i         Index of a the card to get; index from 0, 1, ...
+     * @return          The card indexed by i.
+     */
+    const Card& getCard(size_t i) const;
+
     /** shuffle; shuffles the entire deck.
      *
      * @return          Reference to this object.
      */
     Deck& shuffle(void) noexcept;
+
+    /** size
+     * 
+     * @param return        The size of this deck.
+     */
+    size_t size(void) const noexcept;
 
 private:
     

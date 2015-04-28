@@ -108,8 +108,21 @@ const Deck& Deck::print(size_t index) const
     return *this;
 }
 
+const Card& Deck::getCard(size_t index) const
+{
+    if (index >= deck.size())
+        throw std::range_error("Error: Deck::getCard");
+
+    return deck[index];
+}
+
 Deck& Deck::shuffle(void) noexcept
 {
     std::random_shuffle(deck.begin(), deck.end());
     return *this;
+}
+
+size_t Deck::size(void) const noexcept
+{
+    return deck.size();
 }
