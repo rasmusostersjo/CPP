@@ -47,7 +47,7 @@ Card::Card(const Color& c, const Value& v)
 
 const Card& Card::view(void) const noexcept
 {
-    std::cout << valueTable[value] << " " << colorTable[color] << std::endl;
+    std::cout << colorTable[color] << " " << valueTable[value] << std::endl;
     return *this;
 }
 

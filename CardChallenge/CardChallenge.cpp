@@ -3,7 +3,7 @@
 #include <algorithm>        // for_each
 #include <string>           // string
 #include <iostream>         // cout, cin
-#include <cstdlib>          // system
+#include <cstdlib>          // system, atoi
 
 ////////////////////////// static helper functions /////////////////////////////
 
@@ -155,13 +155,13 @@ CardChallenge& CardChallenge::play(void) noexcept
     std::cout << std::endl << "Do you want to re state any card? (y/n) ";
     bool reState;
     do {
-        size_t card_i;
+        std::string card_i;
 
         if ( (reState = yes_no()) ) {
             std::cout << "Enter which card to restate: ";
             std::cin >> card_i;
             try {
-                stateCard(card_i - 1);  // stateCard index from 0
+                stateCard(atoi(card_i.c_str()) - 1);  // stateCard index from 0
             }
             catch (std::range_error) {
                 std::cerr << "Invalid card index." << std::endl;
