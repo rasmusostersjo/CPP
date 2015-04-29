@@ -4,6 +4,7 @@
 #include <string>           // string
 #include <iostream>         // cout, cin
 #include <cstdlib>          // system, atoi
+#include <iomanip>          // setprecision
 
 ////////////////////////// static helper functions /////////////////////////////
 
@@ -70,7 +71,7 @@ static bool yes_no(void)
 //////////////////////////// CardChallenge ////////////////////////////////////
 
 CardChallenge::CardChallenge(size_t lv)
-    : deck(lv), scoreDeck(lv)
+    : deck(lv), scoreDeck(lv), time(0)
 {
     // Initialliy scoreDeck contains only jokers
     for (size_t i = 0; i < scoreDeck.size(); ++i)
@@ -138,14 +139,25 @@ size_t CardChallenge::computeScore(void) noexcept
     return s;
 }
 
+const std::chrono::duration<double>& CardChallenge::getTimeUsed(void) const
+    noexcept
+{
+    return time;
+}
+
 CardChallenge& CardChallenge::play(void) noexcept
 {
+
     std::cout << "Press ENTER to start.";
     readENTER();
     clearScreen();
 
-    // Let user view all cards once
+    // Let user view all cards once and store the times used
+    std::chrono::time_point<std::chrono::system_clock> t1, t2;
+    t1 = std::chrono::system_clock::now();
     view();
+    t2 = std::chrono::system_clock::now();
+    time = t2 - t1;
 
     // let user re state all cards
     for (size_t i = 0; i < deck.size(); ++i)
@@ -172,8 +184,10 @@ CardChallenge& CardChallenge::play(void) noexcept
     } while(reState);
 
     // Print results
-    std::cout << std::endl << "\tYour score: " << computeScore() << "/"
-              << deck.size() << std::endl << std::endl
+    std::cout << std::endl   << "\tYour score: "   << computeScore() << "/"
+              << deck.size() << std::endl          << "\tYour time:  "
+              << std::setprecision(TIME_PRECISION) << time.count()   << "s"
+              << std::endl   << std::endl
               << "Do you want to reveal the entire solution? (y/n) ";
     if (yes_no())
         deck.print();

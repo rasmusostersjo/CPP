@@ -3,6 +3,7 @@
 
 #include "Card.h"
 #include <cstddef>       // size_t
+#include <chrono>        // to measure time
 
 class CardChallenge
 {
@@ -61,9 +62,16 @@ public:
      */
     size_t computeScore(void) noexcept;
 
+    /** getTimeUsed
+     *
+     * @return          The time used by the user @view().
+     */
+    const std::chrono::duration<double>& getTimeUsed(void) const noexcept;
+
 private:
-    Deck deck;                  // the deck being used
-    Deck scoreDeck;             // contains the cards specified by the user
+    Deck deck;                              // the real deck
+    Deck scoreDeck;                         // to keep track of score
+    std::chrono::duration<double> time;     // time used by the user @view()
 };
 
 #endif // CARD_CHALLENGE
