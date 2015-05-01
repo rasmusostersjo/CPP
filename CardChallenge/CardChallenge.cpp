@@ -71,11 +71,8 @@ static bool yes_no(void)
 //////////////////////////// CardChallenge ////////////////////////////////////
 
 CardChallenge::CardChallenge(size_t lv)
-    : deck(lv), scoreDeck(lv), time(0)
+    : deck(lv), scoreDeck(COLOR, JOKER, lv), time(0)
 {
-    // Initialliy scoreDeck contains only jokers
-    for (size_t i = 0; i < scoreDeck.size(); ++i)
-        scoreDeck.getCard(i).setColor(COLOR).setValue(JOKER);
 }
 
 CardChallenge& CardChallenge::shuffle(void) noexcept

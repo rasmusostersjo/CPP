@@ -18,7 +18,5 @@ int main(int argc, char *argv[])
     else
         std::cerr << "Invalid lv; the card challenge closes." << std::endl;
 
-    
-
     return 0;
 }

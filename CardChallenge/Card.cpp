@@ -89,13 +89,20 @@ Deck::Deck(size_t n)
     std::for_each(deck.begin(), deck.end(), [&v, &c](Card& k) {
 
         // Initialize card
-        k.setValue(v);
-        k.setColor(c);
+        k.setColor(c).setValue(v);
 
         // Increment value and color in cycles; dont assign jokers
         if ( (v = Value((v + 1) % (VALUE - 1))) == 0 )
             c = Color( (c + 1) % COLOR );
-    });
+    } );
+}
+
+Deck::Deck(const Color& c, const Value& v, size_t n)
+    : deck(n)
+{
+    // Initialize all cards to color c and value v
+    std::for_each(deck.begin(), deck.end(), [=](Card& k) {
+        k.setColor(c).setValue(v); } );
 }
 
 const Deck& Deck::print(void) const noexcept

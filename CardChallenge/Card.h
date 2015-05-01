@@ -112,6 +112,15 @@ public:
      */
     Deck(size_t n = DEFAULT_DECK_SIZE);
 
+    /** Constructor
+     * Intialized the deck with n cards of color c and value v.
+     *
+     * @param c         Color to assign all cards.
+     * @param v         Value to assign all cards.
+     * @param n         Amount of cards to assign the deck.
+     */
+    Deck(const Color& c, const Value& v, size_t n = DEFAULT_DECK_SIZE);
+
     /** Use the compiler defaults
      */
     Deck(const Deck&)            = default;
