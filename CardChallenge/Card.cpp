@@ -15,15 +15,15 @@ static const char* colorTable[COLOR + 1] {
  */
 static const char* valueTable[VALUE + 1] {
     "Ace",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
     "Jack",
     "Queen",
     "King",
@@ -45,7 +45,12 @@ Card::Card(const Color& c, const Value& v)
 
 const Card& Card::view(void) const noexcept
 {
-    std::cout << colorTable[color] << " " << valueTable[value] << std::endl;
+    // Print value and color if any
+    std::cout << valueTable[value];
+    if (color != COLOR)
+        std::cout << " of " << colorTable[color];
+    std::cout << std::endl;
+
     return *this;
 }
 
