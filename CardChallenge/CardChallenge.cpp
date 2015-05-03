@@ -114,7 +114,7 @@ CardChallenge& CardChallenge::stateCard(size_t i)
         throw std::range_error("Error: CardChallenge::stateCard");
 
     std::cout << "State card " << i + 1 << ": ";
-    std::cin  >> c >> v;
+    std::cin  >> v >> c;
 
     // Update scoreDeck
     color = transformColor(c);

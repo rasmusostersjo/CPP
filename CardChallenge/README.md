@@ -6,7 +6,7 @@ order.
 
 Note:
 =====
-Cards are restated on the format "color" "value". (!)<br/>
+Cards are restated on the format "[v]alue" "[c]olor". (!)<br/>
 
 Hearts: h <br/>
 Clubs: c <br/>
@@ -27,6 +27,6 @@ Jack: j <br/>
 Queen: q <br/>
 King: k <br/>
 
-<br/><br/>
-(!): (Hearts, Jack) would be restated as: h j <br/>
+<br/>
+(!): "Jack of Hearts" would be restated as: j h <br/>
 (!!): Since Ace is restated by 'a', it is fine to restate a 10 with just the '1'.
