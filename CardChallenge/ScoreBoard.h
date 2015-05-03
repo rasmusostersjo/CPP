@@ -47,6 +47,15 @@ public:
      */
     Score& update(size_t lv, size_t s, size_t t, const std::string& n) noexcept;
 
+    /** Larger than operator
+     * Returns true if this score is higher than s by comparing:
+     *      a) score
+     *      b) time if scores were equal
+     *
+     * @return              true/false.
+     */
+    bool operator>(const Score& s) const noexcept;
+
     /** TODO: Overload the << operator for printing
      */
 
@@ -62,6 +71,8 @@ class ScoreBoard {
 public:
 
     /** (Default) constructor
+     * Invokes the default constructor for each score, i.e. all scores are set
+     * to be unset until load is called manually.
      *
      * @param hsf       Name of a text file to save/load high scores.
      * @param hss       Size of the high score list.
