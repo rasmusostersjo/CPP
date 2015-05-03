@@ -1,6 +1,7 @@
 #include "ScoreBoard.h"
 #include <algorithm>        // for_each
-#include <iomanip>          // setw
+#include <iomanip>          // setw, left
+#include <iostream>         // cout, endl
 
 ///////////////////////////// Score ////////////////////////////////////////////
 
@@ -34,8 +35,9 @@ bool Score::operator>(const Score& s) const noexcept
 std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept
 {
     os << std::setw(NICK_WIDTH)  << obj.nick
-       << std::setw(SCORE_WIDTH) << obj.score << "/" << obj.level
-       << std::setw(TIME_WIDTH)  << obj.time << TIME_UNIT;
+       << std::setw(SCORE_WIDTH) << obj.score
+       << std::setw(LEVEL_WIDTH) << obj.level
+       << std::setw(TIME_WIDTH)  << obj.time;
 
     return os;
 }
@@ -68,5 +70,20 @@ ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
 
 const ScoreBoard& ScoreBoard::print(void) const noexcept
 {
+    // Print table frame and then all valid scores
+    std::cout << std::left << std::setw(TAB_WIDTH)   << ""
+              << std::left << std::setw(NICK_WIDTH)  << PLAYER
+              << std::left << std::setw(SCORE_WIDTH) << SCORE
+              << std::left << std::setw(LEVEL_WIDTH) << LEVEL
+              << std::left << std::setw(TIME_WIDTH)  << TIME << std::endl
+              << std::left << std::setw(TAB_WIDTH)   << ""
+              << std::left << std::setw(NICK_WIDTH)  << _PLAYER_
+              << std::left << std::setw(SCORE_WIDTH) << _SCORE_
+              << std::left << std::setw(LEVEL_WIDTH) << _LEVEL_
+              << std::left << std::setw(TIME_WIDTH)  << _TIME_ << std::endl;
+    std::for_each(highScore.begin(), highScore.end(), [](const Score& s) {
+        std::cout << std::left << std::setw(TAB_WIDTH) << "" << s << std::endl;
+    } );
+
     return *this;
 }

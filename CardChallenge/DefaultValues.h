@@ -14,10 +14,21 @@
 #define DEFAULT_SCORE      0               // Signal no score
 #define DEFAULT_HS_SIZE    10              // Dfl. amt. of high scores per board
 
-#define NICK_WIDTH  0           // Amount of space for nick name field
+#define TAB_WIDTH   4           // Tab the entire score table
+#define NICK_WIDTH  16          // Amount of space for nick name field
 #define SCORE_WIDTH 8           // Amount of space for score/level field
+#define LEVEL_WIDTH 8           // Amount of space for score/level field
 #define TIME_WIDTH  16          // Amount of space for time field
+
 #define TIME_UNIT   "s"         // Time is expressed in seconds
+#define PLAYER      "nickname:" // Easy to change language of table
+#define _PLAYER_    "---------" // -------------- "" ---------------
+#define SCORE       "score:"    // -------------- "" ---------------
+#define _SCORE_     "------"    // -------------- "" ---------------
+#define LEVEL       "level:"    // -------------- "" ---------------
+#define _LEVEL_     "------"    // -------------- "" ---------------
+#define TIME        "time(s):"  // -------------- "" ---------------
+#define _TIME_      "--------"  // -------------- "" ---------------    
 
 // Exception constants
 #define READ_ERROR  ""          // Default to empty string
