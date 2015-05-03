@@ -1,5 +1,6 @@
 #include "ScoreBoard.h"
 #include <algorithm>        // for_each
+#include <iomanip>          // setw
 
 ///////////////////////////// Score ////////////////////////////////////////////
 
@@ -30,8 +31,15 @@ bool Score::operator>(const Score& s) const noexcept
     return score == s.score? time < s.time : score > s.score;
 }
 
-/** TODO: Overload the << operator for printing
- */
+std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept
+{
+    os << std::setw(NICK_WIDTH)  << obj.nick
+       << std::setw(SCORE_WIDTH) << obj.score << "/" << obj.level
+       << std::setw(TIME_WIDTH)  << obj.time << TIME_UNIT;
+
+    return os;
+}
+
 
 ///////////////////////////// ScoreBoard ///////////////////////////////////////
 
@@ -55,5 +63,10 @@ ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
         highScore.pop_back();
     }
 
+    return *this;
+}
+
+const ScoreBoard& ScoreBoard::print(void) const noexcept
+{
     return *this;
 }

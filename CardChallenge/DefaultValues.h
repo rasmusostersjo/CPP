@@ -14,6 +14,11 @@
 #define DEFAULT_SCORE      0               // Signal no score
 #define DEFAULT_HS_SIZE    10              // Dfl. amt. of high scores per board
 
+#define NICK_WIDTH  0           // Amount of space for nick name field
+#define SCORE_WIDTH 8           // Amount of space for score/level field
+#define TIME_WIDTH  16          // Amount of space for time field
+#define TIME_UNIT   "s"         // Time is expressed in seconds
+
 // Exception constants
 #define READ_ERROR  ""          // Default to empty string
 #define WRITE_ERROR ""          // Default to empty string

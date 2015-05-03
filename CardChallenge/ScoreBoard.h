@@ -5,6 +5,7 @@
 #include <string>           // string
 #include <vector>           // vector
 #include <cstddef>          // size_t
+#include <ostream>          // ostream
 #include "Exception.h"      // write_error, read_error
 #include "DefaultValues.h"
 
@@ -56,8 +57,15 @@ public:
      */
     bool operator>(const Score& s) const noexcept;
 
-    /** TODO: Overload the << operator for printing
+    /** Overload the << operator
+     * Prints nickname, score/level and time, where each fields width is set
+     * by the macros NICK_WIDTH, SCORE_WIDTH and TIME_WIDTH defined in
+     * DefaultValues.h.
+     *
+     * @param o             An output stream to print to.
+     * @param obj           A score object to print.
      */
+    friend std::ostream& operator<<(std::ostream& o, const Score& obj) noexcept;
 
 private:
 
