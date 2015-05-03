@@ -14,4 +14,8 @@
 #define DEFAULT_SCORE      0               // Signal no score
 #define DEFAULT_HS_SIZE    10              // Dfl. amt. of high scores per board
 
+// Exception constants
+#define READ_ERROR  ""          // Default to empty string
+#define WRITE_ERROR ""          // Default to empty string
+
 #endif // DEFAULT_VALUES_H
