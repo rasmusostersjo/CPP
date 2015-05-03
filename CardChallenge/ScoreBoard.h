@@ -22,11 +22,11 @@ public:
      * used viewing the entire deck.
      *
      * @param lv            The game level (difficulty) used.
-     * @param sc            The users score.
+     * @param s             The users score.
      * @param t             The time used viewing the entire deck.
      * @param nick          Nickname of the high score holder.
      */
-    Score(size_t lv, size_t sc, size_t t, const std::string& n);
+    Score(size_t lv, size_t s, size_t t, const std::string& n);
 
     /** Use the compiler defaults
      */
@@ -39,13 +39,13 @@ public:
     /** update; updates the score to the specified values.
      *
      * @param lv            The game level (difficulty) used.
-     * @param sc            The users score.
+     * @param s             The users score.
      * @param t             The time used viewing the entire deck.
      * @param nick          Nickname of the high score holder.
      * @return              Reference to this object.
      * @invalid_argument    Generated if any argument is invalid.
      */
-    Score& update(size_t lv, size_t sc, size_t t, const std::string& n);
+    Score& update(size_t lv, size_t s, size_t t, const std::string& n) noexcept;
 
     /** TODO: Overload the << operator for printing
      */
