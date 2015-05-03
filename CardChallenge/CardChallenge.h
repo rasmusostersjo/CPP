@@ -1,7 +1,7 @@
 #ifndef CARD_CHALLENGE_H
 #define CARD_CHALLENGE_H
 
-#include "Card.h"
+#include "Deck.h"
 #include <cstddef>       // size_t
 #include <chrono>        // to measure time
 
