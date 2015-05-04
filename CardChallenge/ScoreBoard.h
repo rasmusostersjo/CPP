@@ -114,11 +114,18 @@ public:
 
     /** load
      * Reads the high score file and updates the high score vector accordingly.
+     * Note that if the high score file contains less scores than the current
+     * high score vector, additional (zeroed) scores will be appeneded.
+     * Furthermore, if to many high scores are provided only the first
+     * highScore.size() results will be loaded.
+     *
+     * Excepted high score file format:
+     *      <ws><nick><ws><score><ws><level><ws><time><NL>
      *
      * @return          Reference to this object.
      * @read_error      Generated if the score file can not be read from.
      */
-    ScoreBoard& read(void);
+    ScoreBoard& load(void);
 
     /** rename
      * Changes which high score file to save and load to. Note that the old

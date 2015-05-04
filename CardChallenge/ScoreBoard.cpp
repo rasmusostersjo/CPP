@@ -2,6 +2,7 @@
 #include <algorithm>        // for_each
 #include <iomanip>          // setw, left
 #include <iostream>         // cout, endl
+#include <fstream>
 
 ///////////////////////////// Score ////////////////////////////////////////////
 
@@ -63,6 +64,49 @@ ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
         highScore.pop_back();
     }
 
+    return *this;
+}
+
+const ScoreBoard& ScoreBoard::save(void) const
+{
+    // Attempt to open high score file for writing
+    std::ofstream writeFile(highScoreFile, std::ios::out | std::ios::trunc);
+    if (!writeFile.is_open())
+        throw write_error("ScoreBoard::save");
+
+    // Write all current high scores to the high score file
+    std::for_each(highScore.begin(), highScore.end(), [&](const Score& s) {
+        writeFile << s << std::endl; } );
+    writeFile.close();
+
+    return *this;
+}
+
+ScoreBoard& ScoreBoard::load(void)
+{
+    // Attempt to open high score file for reading
+    std::ifstream readFile(highScoreFile, std::ios::in);
+    if (!readFile.is_open())
+        throw read_error("ScoreBoard::load");
+
+    // Read high scores (at most highScore.size() of them)
+    size_t lv, s, t, i;
+    std::string n;
+    for (i = 0; readFile >> std::ws >> n >> std::ws >> s >> std::ws >> lv
+                         >> std::ws >> t && i < highScore.size(); ++i)
+        highScore[i] = Score(lv, s, t, n);
+    readFile.close();
+
+    // Zero out remaining high scores if any
+    while (i < highScore.size())
+        highScore[i++] = Score();
+
+    return *this;
+}
+
+ScoreBoard& ScoreBoard::rename(const std::string& newHighScoreFile) noexcept
+{
+    highScoreFile = newHighScoreFile;
     return *this;
 }
 
