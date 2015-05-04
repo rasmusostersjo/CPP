@@ -50,8 +50,6 @@ ScoreBoard::ScoreBoard(const std::string& hsf, size_t hss)
 {
 }
 
-/** TODO: Test/confirm no off-by-errors
- */
 ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
 {
     // Decide where (if) to insert the new high score
