@@ -142,16 +142,6 @@ public:
      */
     const ScoreBoard& print(void) const noexcept;
 
-    /** print
-     * Prints the first n entries in the score board.
-     *
-     * @param n         Amount of entries to print.
-     * @return          Constant reference to this object.
-     * @out_of_range    Generated if n is larger the size of the high score
-     *                  vector.
-     */
-    const ScoreBoard& print(size_t n) const;
-
 private:
 
     std::string        highScoreFile;
