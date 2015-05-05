@@ -1,4 +1,5 @@
 #include "CardChallenge.h"
+#include "Exception.h"
 #include <vector>           // vector
 #include <algorithm>        // for_each
 #include <string>           // string
@@ -70,9 +71,22 @@ static bool yes_no(void)
 
 //////////////////////////// CardChallenge ////////////////////////////////////
 
-CardChallenge::CardChallenge(size_t lv)
-    : deck(lv), scoreDeck(COLOR, JOKER, lv), time(0)
+CardChallenge::CardChallenge(size_t lv, const std::string& n,
+    const ScoreBoard& sb)
+    : deck(lv), scoreDeck(COLOR, JOKER, lv), time(0), nick(n), scoreBoard(sb)
 {
+    try {
+        scoreBoard.load();  // Attempt to load high scores
+    }
+    catch (read_error) {
+        try {
+            scoreBoard.save();  // create the high score file
+        }
+        catch (write_error) {
+            std::cerr << READ_WRITE_ERROR << std::endl;
+        }
+        std::cerr << READ_ERROR_WRITE_SUCCESS << std::endl;
+    }
 }
 
 CardChallenge& CardChallenge::shuffle(void) noexcept
@@ -180,6 +194,9 @@ CardChallenge& CardChallenge::play(void) noexcept
 
     } while(reState);
 
+    size_t score = computeScore();
+    scoreBoard.update(Score(deck.size(), score, time, nick)).save();
+
     // Print results
     std::cout << std::endl   << "\tYour score: "   << computeScore() << "/"
               << deck.size() << std::endl          << "\tYour time:  "
@@ -189,5 +206,11 @@ CardChallenge& CardChallenge::play(void) noexcept
     if (yes_no())
         deck.print();
 
+    return *this;
+}
+
+const CardChallenge& CardChallenge::viewScoreBoard(void) const noexcept
+{
+    scoreBoard.print();
     return *this;
 }

@@ -93,7 +93,8 @@ ScoreBoard& ScoreBoard::load(void)
         throw read_error("ScoreBoard::load");
 
     // Read high scores (at most highScore.size() of them)
-    size_t lv, s, t, i;
+    size_t lv, s, i;
+    double t;
     std::string n;
     for (i = 0; readFile >> std::ws >> n >> std::ws >> s >> std::ws >> lv
                          >> std::ws >> t && i < highScore.size(); ++i)

@@ -7,6 +7,10 @@
 
 // CardChallenge constants
 #define TIME_PRECISION 4        // Use 4-digit precision to print time used
+#define READ_ERROR_WRITE_SUCCESS \
+    "The high score file was created!"
+#define READ_WRITE_ERROR \
+    "Error: Invalid high score file"
 
 // ScoreBoard constants
 #define DEFAULT_SCORE_FILE "highScore.txt" // File containing high scores

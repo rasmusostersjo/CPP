@@ -2,6 +2,7 @@
 #define CARD_CHALLENGE_H
 
 #include "Deck.h"
+#include "ScoreBoard.h"
 #include <cstddef>       // size_t
 #include <chrono>        // to measure time
 
@@ -15,7 +16,9 @@ public:
      *
      * @param lv        Initialized the lv of the card challenge.
      */
-    CardChallenge(size_t lv = DEFAULT_LV);
+    CardChallenge(size_t lv = DEFAULT_LV,
+        const std::string& nick = DEFAULT_NICK,
+        const ScoreBoard& sb = ScoreBoard(DEFAULT_SCORE_FILE, DEFAULT_HS_SIZE));
 
     /** play; starts the card challenge
      *
@@ -68,10 +71,26 @@ public:
      */
     const std::chrono::duration<double>& getTimeUsed(void) const noexcept;
 
+    /** viewScoreBoard; prints all high scores
+     *
+     * @return          Constant reference to this object.
+     */
+    const CardChallenge& viewScoreBoard(void) const noexcept;
+
+    /** setLevel
+     *
+     * @param lv        New level to assign to the deck.
+     * @return          Reference to this object.
+     * @range_error     Generated if lv is less than 1.
+     */
+    CardChallenge setLevel(size_t n);
+
 private:
     Deck deck;                              // the real deck
     Deck scoreDeck;                         // to keep track of score
     std::chrono::duration<double> time;     // time used by the user @view()
+    std::string nick;                       // user nick name
+    ScoreBoard scoreBoard;                  // high scores
 };
 
 #endif // CARD_CHALLENGE
