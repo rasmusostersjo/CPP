@@ -6,7 +6,7 @@
 #include <vector>           // vector
 #include <cstddef>          // size_t
 #include <ostream>          // ostream
-#include "Exception.h"      // write_error, read_error
+#include <chrono>           // to store used time
 #include "DefaultValues.h"
 
 class Score {
@@ -27,7 +27,8 @@ public:
      * @param t             The time used viewing the entire deck.
      * @param nick          Nickname of the high score holder.
      */
-    Score(size_t lv, size_t s, size_t t, const std::string& n);
+    Score(size_t lv, size_t s, const std::chrono::duration<double>& t,
+        const std::string& n);
 
     /** Use the compiler defaults
      */
@@ -46,7 +47,8 @@ public:
      * @return              Reference to this object.
      * @invalid_argument    Generated if any argument is invalid.
      */
-    Score& update(size_t lv, size_t s, size_t t, const std::string& n) noexcept;
+    Score& update(size_t lv, size_t s, const std::chrono::duration<double>& t,
+        const std::string& n) noexcept;
 
     /** Larger than operator
      * Returns true if this score is higher than s by comparing:
@@ -71,7 +73,7 @@ private:
 
     size_t level;
     size_t score;
-    size_t time;
+    std::chrono::duration<double> time;
     std::string nick;
 };
 

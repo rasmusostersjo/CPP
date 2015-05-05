@@ -1,4 +1,5 @@
 #include "ScoreBoard.h"
+#include "Exception.h"      // write_error, read_error
 #include <algorithm>        // for_each
 #include <iomanip>          // setw, left
 #include <iostream>         // cout, endl
@@ -12,12 +13,14 @@ Score::Score(void)
 {
 }
 
-Score::Score(size_t lv, size_t s, size_t t, const std::string& n)
+Score::Score(size_t lv, size_t s, const std::chrono::duration<double>& t,
+    const std::string& n)
     : level(lv), score(s), time(t), nick(n)
 {
 }
 
-Score& Score::update(size_t lv, size_t s, size_t t, const std::string& n)
+Score& Score::update(size_t lv, size_t s,
+    const std::chrono::duration<double>& t, const std::string& n)
     noexcept
 {
     level = lv;
@@ -38,7 +41,7 @@ std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept
     os << std::setw(NICK_WIDTH)  << obj.nick
        << std::setw(SCORE_WIDTH) << obj.score
        << std::setw(LEVEL_WIDTH) << obj.level
-       << std::setw(TIME_WIDTH)  << obj.time;
+       << std::setw(TIME_WIDTH)  << obj.time.count();
 
     return os;
 }
@@ -94,7 +97,7 @@ ScoreBoard& ScoreBoard::load(void)
     std::string n;
     for (i = 0; readFile >> std::ws >> n >> std::ws >> s >> std::ws >> lv
                          >> std::ws >> t && i < highScore.size(); ++i)
-        highScore[i] = Score(lv, s, t, n);
+        highScore[i] = Score(lv, s, std::chrono::duration<double>(t), n);
     readFile.close();
 
     // Zero out remaining high scores if any
