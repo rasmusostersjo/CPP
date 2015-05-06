@@ -29,13 +29,19 @@ public:
      */
     Deck(const Color& c, const Value& v, size_t n = DEFAULT_DECK_SIZE);
 
+    /** Assignment operator
+     *
+     * @param d         A deck to copy to this deck.
+     * @return          Reference to this object.
+     */
+    Deck& operator=(const Deck& d);
+
     /** Use the compiler defaults
      */
-    Deck(const Deck&)            = default;
-    Deck(Deck&&)                 = default;
-    ~Deck(void)                  = default;
-    Deck& operator=(const Deck&) = default;
-    Deck& operator=(Deck&&)      = default;
+    Deck(const Deck&)       = default;
+    Deck(Deck&&)            = default;
+    ~Deck(void)             = default;
+    Deck& operator=(Deck&&) = default;
 
     /** print; prints the entire deck.
      *

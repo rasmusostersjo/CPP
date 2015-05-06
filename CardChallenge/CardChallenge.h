@@ -83,7 +83,7 @@ public:
      * @return          Reference to this object.
      * @range_error     Generated if lv is less than 1.
      */
-    CardChallenge& setLevel(size_t n);
+    CardChallenge& setLevel(size_t lv);
 
     // TODO: Add test to prevent nick names > NICK_WIDTH - 1
     /** setNick

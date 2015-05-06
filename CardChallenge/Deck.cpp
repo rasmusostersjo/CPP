@@ -60,3 +60,9 @@ size_t Deck::size(void) const noexcept
 {
     return deck.size();
 }
+
+Deck& Deck::operator=(const Deck& d)
+{
+    deck.assign(d.deck.begin(), d.deck.end());
+    return *this;
+}

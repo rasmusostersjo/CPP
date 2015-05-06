@@ -214,3 +214,31 @@ const CardChallenge& CardChallenge::viewScoreBoard(void) const noexcept
     scoreBoard.print();
     return *this;
 }
+
+CardChallenge& CardChallenge::setLevel(size_t lv)
+{
+    if (lv == 0)
+        throw std::range_error("CardChallenge::setLevel");
+
+    deck = Deck(lv);                            // reset deck
+    scoreDeck = Deck(COLOR, JOKER, lv);         // reset score deck
+    time = std::chrono::duration<double>(0);    // reset timer
+
+    return *this;
+}
+
+CardChallenge& CardChallenge::setNick(const std::string& n) noexcept
+{
+    nick = n;
+    return *this;
+}
+
+const std::string& CardChallenge::getNick(void) const noexcept
+{
+    return nick;
+}
+
+size_t CardChallenge::getLevel(void) const noexcept
+{
+    return deck.size();
+}
