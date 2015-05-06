@@ -1,5 +1,7 @@
 #include "Card.h"
-#include <iostream>         // cout
+#include "EnglishLanguage.h"
+#include "Constants.h"
+#include <iostream>             // cout, endl
 
 /** Table to print card colors
  */

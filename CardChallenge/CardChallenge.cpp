@@ -1,75 +1,11 @@
 #include "CardChallenge.h"
 #include "Exception.h"
+#include "EnglishLanguage.h"
+#include "Helper.h"
 #include <stdexcept>        // invalid_argument
-#include <vector>           // vector
-#include <algorithm>        // for_each
-#include <string>           // string
-#include <iostream>         // cout, cin
-#include <cstdlib>          // system, atoi
+#include <iostream>         // cout, cin, cerr, endl
+#include <cstdlib>          // atoi
 #include <iomanip>          // setprecision
-
-////////////////////////// static helper functions /////////////////////////////
-
-static void readENTER(void)
-{
-    while (std::cin.get() != '\n')
-        ;
-}
-
-static void clearScreen(void)
-{
-    system("clear");
-}
-
-static Color transformColor(const std::string& c)
-{
-    switch (*c.c_str()) {
-        case RESTATE_HEARTS:   return HEARTS;   break;
-        case RESTATE_CLUBS:    return CLUBS;    break;
-        case RESTATE_DIAMONDS: return DIAMONDS; break;
-        case RESTATE_SPADES:   return SPADES;   break;
-    }
-
-    return COLOR;   // invalid
-}
-
-static Value transformValue(const std::string& v)
-{
-    switch (*v.c_str()) {
-        case RESTATE_ACE:   return ACE;   break;
-        case RESTATE_TWO:   return TWO;   break;
-        case RESTATE_THREE: return THREE; break;
-        case RESTATE_FOUR:  return FOUR;  break;
-        case RESTATE_FIVE:  return FIVE;  break;
-        case RESTATE_SIX:   return SIX;   break;
-        case RESTATE_SEVEN: return SEVEN; break;
-        case RESTATE_EIGHT: return EIGHT; break;
-        case RESTATE_NINE:  return NINE;  break;
-        case RESTATE_TEN:   return TEN;   break;
-        case RESTATE_JACK:  return JACK;  break;
-        case RESTATE_QUEEN: return QUEEN; break;
-        case RESTATE_KING:  return KING;  break;
-        case RESTATE_JOKER: return JOKER; break;
-    }
-
-    return VALUE; // invalid
-}
-
-/** yes_no
- * Lets the user enter yes (y, Y) or no (n, N).
- * 
- * @return          1 to signal yes; else 0.
- */
-static bool yes_no(void)
-{
-    int c;
-
-    while ((c = std::cin.get()) != 'y' && c != 'Y' && c != 'n' && c != 'N')
-        ;
-    readENTER(); 
-
-    return (c == 'y' || c == 'Y')? 1 : 0;
-}
 
 //////////////////////////// CardChallenge ////////////////////////////////////
 

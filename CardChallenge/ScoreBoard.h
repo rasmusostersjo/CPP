@@ -7,7 +7,7 @@
 #include <cstddef>          // size_t
 #include <ostream>          // ostream
 #include <chrono>           // to store used time
-#include "DefaultValues.h"
+#include "Constants.h"
 
 class Score {
 public:

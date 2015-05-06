@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     if ((lv = atoi(strLv.c_str())) > 0) {
         srand(time(NULL));
         CardChallenge c(lv, nick);  // use the standard high score settings
-        c.shuffle().play().viewScoreBoard();
+        c.shuffle().play().printLatestScore().viewScoreBoard();
     }
     else
         std::cerr << "Invalid lv; the card challenge closes." << std::endl;

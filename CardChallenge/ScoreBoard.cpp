@@ -1,10 +1,11 @@
 #include "ScoreBoard.h"
+#include "EnglishLanguage.h"
 #include "Exception.h"      // write_error, read_error
 #include <stdexcept>        // invalid_argument
 #include <algorithm>        // for_each
 #include <iomanip>          // setw, left
 #include <iostream>         // cout, endl
-#include <fstream>
+#include <fstream>          // read/write file
 
 ///////////////////////////// Score ////////////////////////////////////////////
 

@@ -2,7 +2,7 @@
 #define CARD_H
 
 // Libraries
-#include "DefaultValues.h"
+#include "Constants.h"
 
 /** Data type for a cards value
  */

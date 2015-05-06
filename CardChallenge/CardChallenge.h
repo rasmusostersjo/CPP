@@ -1,11 +1,13 @@
 #ifndef CARD_CHALLENGE_H
 #define CARD_CHALLENGE_H
 
+// Libraries
 #include "Deck.h"
 #include "ScoreBoard.h"
-#include "DefaultValues.h"
+#include "Constants.h"
 #include <cstddef>       // size_t
 #include <chrono>        // to measure time
+#include <string.h>      // string
 
 class CardChallenge
 {

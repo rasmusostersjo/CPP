@@ -2,7 +2,7 @@
 #define EXCEPTION_H
 
 // Libraries
-#include "DefaultValues.h"
+#include "Constants.h"
 #include <stdexcept>        // runtime_error
 #include <string>           // string
 
