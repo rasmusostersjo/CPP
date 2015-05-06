@@ -1,51 +1,21 @@
 #include "Helper.h"
 #include "Constants.h"
 #include "EnglishLanguage.h"
-#include <cstdlib>              // system
-#include <iostream>             // cout, cin, cerr
+#include <iostream>             // cin
 #include <string>               // string
 
-void menu(void)
-{
-    std::cout << S_STARS    << std::endl
-              << S_OPTION_1 << std::endl
-              << S_OPTION_2 << std::endl
-              << S_OPTION_3 << std::endl
-              << S_OPTION_4 << std::endl
-              << S_OPTION_5 << std::endl
-              << S_STARS    << std::endl;
-}
-
-int getChoice(void)
-{
-    std::string c;
-
-    // Let user choose a menu option
-    std::cout << S_ENTER_CHOICE;
-    std::cin  >> c;
-    std::cin.clear();
-    
-    int choice = *c.c_str() - '0';
-    if (choice < FIRST_OPTION || choice > LAST_OPTION) {
-        std::cerr << S_INVALID_CHOICE << std::endl;        
-        return INVALID_CHOICE;
-    }
-    
-    return choice;
-}
-
-void readENTER(void)
+void helper::readENTER(void)
 {
     while (std::cin.get() != '\n')
         ;
 }
 
-void clearScreen(void)
+void helper::clearScreen(void)
 {
     system("clear");
 }
 
-bool yes_no(void)
+bool helper::yes_no(void)
 {
     int c;
 
@@ -57,7 +27,7 @@ bool yes_no(void)
     return (c == S_LOWER_YES || c == S_UPPER_YES)? true : false;
 }
 
-Color transformColor(const std::string& c)
+Color helper::transformColor(const std::string& c)
 {
     switch (*c.c_str()) {
         case RESTATE_HEARTS:   return HEARTS;   break;
@@ -69,7 +39,7 @@ Color transformColor(const std::string& c)
     return COLOR;   // invalid
 }
 
-Value transformValue(const std::string& v)
+Value helper::transformValue(const std::string& v)
 {
     switch (*v.c_str()) {
         case RESTATE_ACE:   return ACE;   break;

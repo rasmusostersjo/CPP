@@ -1,25 +1,54 @@
 #include "Driver.h"
 #include "EnglishLanguage.h"
-#include <iostream>             // cout, endl, cout
+#include <iostream>             // cout, endl, cout, cerr
 #include <string>               // string
 #include <stdexcept>            // range_error
-#include <cstdlib>              // atoi
+#include <cstdlib>              // atoi, system
 
-void play(CardChallenge& c)
+void driver::menu(void)
+{
+    std::cout << S_STARS    << std::endl
+              << S_OPTION_1 << std::endl
+              << S_OPTION_2 << std::endl
+              << S_OPTION_3 << std::endl
+              << S_OPTION_4 << std::endl
+              << S_OPTION_5 << std::endl
+              << S_STARS    << std::endl;
+}
+
+int driver::getChoice(void)
+{
+    std::string c;
+
+    // Let user choose a menu option
+    std::cout << S_ENTER_CHOICE;
+    std::cin  >> c;
+    std::cin.clear();
+
+    int choice = *c.c_str() - '0';
+    if (choice < FIRST_OPTION || choice > LAST_OPTION) {
+        std::cerr << S_INVALID_CHOICE << std::endl;
+        return INVALID_CHOICE;
+    }
+
+    return choice;
+}
+
+void driver::play(CardChallenge& c)
 {
     if (c.play().newHighScore())
         std::cout << std::endl << S_NEW_HIGH_SCORE << std::endl;
     c.printLatestScore();
 }
 
-void viewScoreBoard(CardChallenge& c)
+void driver::viewScoreBoard(CardChallenge& c)
 {
     std::cout << std::endl;
     c.viewScoreBoard();
     std::cout << std::endl << std::endl;
 }
 
-void changeLevel(CardChallenge& c)
+void driver::changeLevel(CardChallenge& c)
 {
     std::string level;
 
@@ -37,7 +66,7 @@ void changeLevel(CardChallenge& c)
 }
 
 // TODO: Implement testing for nick name length
-void changeNickName(CardChallenge& c)
+void driver::changeNickName(CardChallenge& c)
 {
     std::string nick;
 
@@ -49,7 +78,7 @@ void changeNickName(CardChallenge& c)
     c.setNick(nick);
 }
 
-void exitCardChallenge(void)
+void driver::exitCardChallenge(void)
 {
     std::cout << S_EXIT_MSG << std::endl;
 }

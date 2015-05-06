@@ -41,8 +41,8 @@ const CardChallenge& CardChallenge::view(void) const noexcept
 {
     for (size_t i = 0; i < deck.size(); ++i) {
         deck.print(i);
-        readENTER();
-        clearScreen();
+        helper::readENTER();
+        helper::clearScreen();
     }
 
     return *this;
@@ -54,8 +54,8 @@ const CardChallenge& CardChallenge::view(size_t i) const
         throw std::range_error("Error: CardChallenge::view");
 
     deck.print(i);
-    readENTER();
-    clearScreen();
+    helper::readENTER();
+    helper::clearScreen();
 
     return *this;
 }
@@ -73,8 +73,8 @@ CardChallenge& CardChallenge::stateCard(size_t i)
     std::cin  >> v >> c;
 
     // Update scoreDeck
-    color = transformColor(c);
-    value = transformValue(v);
+    color = helper::transformColor(c);
+    value = helper::transformValue(v);
     scoreDeck.getCard(i).setColor(color).setValue(value);
 
     return *this;
@@ -96,8 +96,8 @@ CardChallenge& CardChallenge::play(void) noexcept
 {
     std::cout << S_START;
     deck.shuffle();
-    readENTER();
-    clearScreen();
+    helper::readENTER();
+    helper::clearScreen();
 
     // Let user view all cards once and store the times used
     std::chrono::time_point<std::chrono::system_clock> t1, t2;
@@ -116,7 +116,7 @@ CardChallenge& CardChallenge::play(void) noexcept
     do {
         std::string card_i;
 
-        if ( (reState = yes_no()) ) {
+        if ( (reState = helper::yes_no()) ) {
             std::cout << S_RESTATE_CARD_INDEX;
             std::cin >> card_i;
             try {
@@ -194,7 +194,7 @@ const CardChallenge& CardChallenge::printLatestScore(void) const noexcept
                   << S_YOUR_TIME << std::setprecision(TIME_PRECISION)
                   << currentScore.getTime().count() << S_TIME_UNIT << std::endl
                   << std::endl << Q_REVEAL_SOLUTION;
-        if (yes_no()) {
+        if (helper::yes_no()) {
             std::cout << std::endl;
             deck.print();
         }
