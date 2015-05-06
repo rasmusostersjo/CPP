@@ -47,6 +47,13 @@ public:
      */
     const CardChallenge& printLatestScore(void) const noexcept;
 
+    /** newHighScore
+     * States if the current score was a new high score or not.
+     *
+     * @return          true/false.
+     */
+    bool newHighScore(void) const noexcept;
+
     /** shuffle; note that srand() must be seeded
      *
      * @return          Reference to this object.
@@ -102,6 +109,7 @@ private:
     Deck scoreDeck;         // to keep track of restatements
     std::string nick;
     Score currentScore;
+    bool newHighScoreFlag;
     ScoreBoard scoreBoard;
 
 // Helper functions

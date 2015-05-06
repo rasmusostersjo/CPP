@@ -75,7 +75,8 @@ static bool yes_no(void)
 CardChallenge::CardChallenge(size_t lv, const std::string& n,
     const ScoreBoard& sb)
     : deck(lv), scoreDeck(COLOR, JOKER, lv), nick(n),
-    currentScore(0, 0, std::chrono::duration<double>(0), n)
+    currentScore(0, 0, std::chrono::duration<double>(0), n),
+    newHighScoreFlag(false)
 {
     try {
         scoreBoard.load();  // Attempt to load high scores
@@ -191,9 +192,10 @@ CardChallenge& CardChallenge::play(void) noexcept
 
     } while(reState);
 
-    // TODO: Change ret. value of update to indicate if new high score
+    // Update score
     currentScore = Score(deck.size(), computeScore(), t, nick);
-    scoreBoard.update(currentScore);
+    if (scoreBoard.update(currentScore))
+        newHighScoreFlag = true;
     scoreBoard.save();
 
     return *this;
@@ -214,6 +216,7 @@ CardChallenge& CardChallenge::setLevel(size_t lv)
     deck = Deck(lv);
     scoreDeck = Deck(COLOR, JOKER, lv);
     currentScore.update(Score(0, 0, std::chrono::duration<double>(0), nick));
+    newHighScoreFlag = false;
 
     return *this;
 }
@@ -258,4 +261,9 @@ const CardChallenge& CardChallenge::printLatestScore(void) const noexcept
     }
 
     return *this;
+}
+
+bool CardChallenge::newHighScore(void) const noexcept
+{
+    return newHighScoreFlag;
 }

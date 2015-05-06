@@ -72,7 +72,7 @@ ScoreBoard::ScoreBoard(const std::string& hsf, size_t hss)
 {
 }
 
-ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
+bool ScoreBoard::update(const Score& sc) noexcept
 {
     // Decide where (if) to insert the new high score
     auto rit = --highScore.rbegin();
@@ -85,7 +85,7 @@ ScoreBoard& ScoreBoard::update(const Score& sc) noexcept
         highScore.pop_back();
     }
 
-    return *this;
+    return rit != highScore.rbegin() - 1;
 }
 
 const ScoreBoard& ScoreBoard::save(void) const

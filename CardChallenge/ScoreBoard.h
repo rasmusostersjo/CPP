@@ -121,9 +121,9 @@ public:
      * Updates the score board if s is a new high score.
      *
      * @param s         Score to test for new high score.
-     * @return          Constant reference to this object.
+     * @return          True if s was a new high score; else false.
      */
-    ScoreBoard& update(const Score& s) noexcept;
+    bool update(const Score& s) noexcept;
 
     /** save
      * Writes current high scores to the high score file.
