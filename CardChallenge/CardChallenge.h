@@ -3,6 +3,7 @@
 
 #include "Deck.h"
 #include "ScoreBoard.h"
+#include "DefaultValues.h"
 #include <cstddef>       // size_t
 #include <chrono>        // to measure time
 
@@ -60,13 +61,13 @@ public:
      */
     CardChallenge& shuffle(void) noexcept;
 
-// Access member functions
-
     /** viewScoreBoard; prints all high scores
      *
      * @return          Constant reference to this object.
      */
     const CardChallenge& viewScoreBoard(void) const noexcept;
+
+// Set and get member functions
 
     /** getScore
      *
@@ -102,6 +103,12 @@ public:
      * @return          The current deck level.
      */
     size_t getLevel(void) const noexcept;
+
+    /** setHighScoreFile
+     *
+     * @return          Reference to this object.
+     */
+    CardChallenge& setHighScoreFile(const std::string& hsf);
 
 private:
 

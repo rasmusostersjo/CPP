@@ -1,5 +1,6 @@
 #include "CardChallenge.h"
 #include "Exception.h"
+#include <stdexcept>        // invalid_argument
 #include <vector>           // vector
 #include <algorithm>        // for_each
 #include <string>           // string
@@ -267,3 +268,15 @@ bool CardChallenge::newHighScore(void) const noexcept
 {
     return newHighScoreFlag;
 }
+
+CardChallenge& CardChallenge::setHighScoreFile(const std::string& hsf)
+{
+    try {
+        scoreBoard.rename(hsf);
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_HS_FILE << std::endl;
+    }
+
+    return *this;
+} 

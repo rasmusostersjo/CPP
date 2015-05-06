@@ -34,8 +34,9 @@
 #define TIME_PRECISION 4        // Use 4-digit precision to print time used
 #define S_READ_ERROR_WRITE_SUCCESS "The high score file was created!"
 #define S_READ_WRITE_ERROR         "Error: Invalid high score file"
+#define S_STATE_CARD                "State card "
 #define S_NO_SCORE "There is no score associated with the current settings."
-#define S_STATE_CARD "State card "
+#define S_INVALID_HS_FILE "Error: Invalid high score file - no changes applied."
 
 // CardChallenge::play constants
 #define S_START                  "Press enter to start."

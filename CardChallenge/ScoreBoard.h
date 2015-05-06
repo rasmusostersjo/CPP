@@ -149,12 +149,13 @@ public:
     ScoreBoard& load(void);
 
     /** rename
-     * Changes which high score file to save and load to. Note that the old
-     * high score file is not removed.
+     * Changes which high score file and loads its content.
      *
-     * @return          Reference to this object.
+     * @return              Reference to this object.
+     * @invalid_argument    Generated if the high score file could not be
+     *                      opened; then the old high score file is not changed.
      */
-    ScoreBoard& rename(const std::string& newHighScoreFile) noexcept;
+    ScoreBoard& rename(const std::string& newHighScoreFile);
 
     /** print
      * Prints the entire score board.

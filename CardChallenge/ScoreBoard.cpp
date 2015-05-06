@@ -1,5 +1,6 @@
 #include "ScoreBoard.h"
 #include "Exception.h"      // write_error, read_error
+#include <stdexcept>        // invalid_argument
 #include <algorithm>        // for_each
 #include <iomanip>          // setw, left
 #include <iostream>         // cout, endl
@@ -126,9 +127,17 @@ ScoreBoard& ScoreBoard::load(void)
     return *this;
 }
 
-ScoreBoard& ScoreBoard::rename(const std::string& newHighScoreFile) noexcept
+ScoreBoard& ScoreBoard::rename(const std::string& newHighScoreFile)
 {
-    highScoreFile = newHighScoreFile;
+    std::string oldHighScoreFile = highScoreFile;
+    try {
+        highScoreFile = newHighScoreFile;
+    }
+    catch (read_error) {
+        highScoreFile = oldHighScoreFile;
+        throw std::invalid_argument("ScoreBoard::rename");
+    }
+    
     return *this;
 }
 
