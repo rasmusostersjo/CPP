@@ -84,9 +84,9 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
             scoreBoard.save();  // create the high score file
         }
         catch (write_error) {
-            std::cerr << READ_WRITE_ERROR << std::endl;
+            std::cerr << S_READ_WRITE_ERROR << std::endl;
         }
-        std::cerr << READ_ERROR_WRITE_SUCCESS << std::endl;
+        std::cerr << S_READ_ERROR_WRITE_SUCCESS << std::endl;
     }
 }
 
@@ -195,15 +195,6 @@ CardChallenge& CardChallenge::play(void) noexcept
     scoreBoard.update(currentScore);
     scoreBoard.save();
 
-    // Print results
-    std::cout << std::endl << S_YOUR_SCORE << currentScore.getScore()
-              << S_LEVEL_SCORE_SEP << currentScore.getLevel() << std::endl
-              << S_YOUR_TIME << std::setprecision(TIME_PRECISION)
-              << currentScore.getTime().count() << S_TIME_UNIT << std::endl
-              << std::endl << Q_REVEAL_SOLUTION;
-    if (yes_no())
-        deck.print();
-
     return *this;
 }
 
@@ -245,4 +236,25 @@ size_t CardChallenge::getLevel(void) const noexcept
 const Score& CardChallenge::getScore(void) const noexcept
 {
     return currentScore;
+}
+
+const CardChallenge& CardChallenge::printLatestScore(void) const noexcept
+{
+    // No score
+    if (!currentScore.getScore() && !currentScore.getLevel() && 
+        !currentScore.getTime().count())
+        std::cout << S_NO_SCORE << std::endl;
+
+    // Print score and reveal solution if user wants to
+    else {
+        std::cout << std::endl << S_YOUR_SCORE << currentScore.getScore()
+                  << S_LEVEL_SCORE_SEP << currentScore.getLevel() << std::endl
+                  << S_YOUR_TIME << std::setprecision(TIME_PRECISION)
+                  << currentScore.getTime().count() << S_TIME_UNIT << std::endl
+                  << std::endl << Q_REVEAL_SOLUTION;
+        if (yes_no())
+            deck.print();
+    }
+
+    return *this;
 }

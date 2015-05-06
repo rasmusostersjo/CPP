@@ -38,6 +38,15 @@ public:
      */
     CardChallenge& play(void) noexcept;
 
+    /** printLatestScore;
+     * Prints the last score and lets the user reveal the entire solution.
+     * If the latest score is invalid (i.e. set to 0/0/0/DEFAULT_NICK) an error
+     * message is printed.
+     *
+     * @return          Constant reference to this object.
+     */
+    const CardChallenge& printLatestScore(void) const noexcept;
+
     /** shuffle; note that srand() must be seeded
      *
      * @return          Reference to this object.
@@ -54,7 +63,7 @@ public:
 
     /** getScore
      *
-     * @return          Current score; always set to (0, 0, 0, nick) to
+     * @return          Current score; always set to (0, 0, 0, ...) to
      *                  signal no current score.
      */
     const Score& getScore(void) const noexcept;

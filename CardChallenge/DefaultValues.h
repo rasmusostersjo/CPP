@@ -21,7 +21,7 @@
 #define COLOR_HEARTS   "Hearts"
 #define COLOR_CLUBS    "Clubs"
 #define COLOR_SPADES   "Spades"
-#define COLOR_DIMAONDS "Diamonds"
+#define COLOR_DIAMONDS "Diamonds"
 #define COLOR_NO_COLOR ""
 
 #define COLOR_VALUE_SEPARATE " of "
@@ -32,10 +32,9 @@
 
 // CardChallenge constants
 #define TIME_PRECISION 4        // Use 4-digit precision to print time used
-#define READ_ERROR_WRITE_SUCCESS \
-    "The high score file was created!"
-#define READ_WRITE_ERROR \
-    "Error: Invalid high score file"
+#define S_READ_ERROR_WRITE_SUCCESS "The high score file was created!"
+#define S_READ_WRITE_ERROR         "Error: Invalid high score file"
+#define S_NO_SCORE "There is no score associated with the current settings."
 
 // CardChallenge::play constants
 #define S_START                  "Press enter to start."
@@ -43,7 +42,7 @@
 #define S_RESTATE_CARD_INDEX     "Enter which card to restate: "
 #define S_INVALID_CARD_INDEX     "Invalid card index."
 #define Q_RESTATE_ANY_OTHER_CARD "Do you want to restate any other card? (y/n) "
-#define S_YOUR_SCORE             "\tYour score: "
+#define S_YOUR_SCORE             "\tYour score:  "
 #define S_LEVEL_SCORE_SEP        "/"
 #define S_YOUR_TIME              "\tYour time:   "
 #define S_TIME_UNIT              "s"
