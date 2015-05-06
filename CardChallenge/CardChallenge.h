@@ -83,7 +83,27 @@ public:
      * @return          Reference to this object.
      * @range_error     Generated if lv is less than 1.
      */
-    CardChallenge setLevel(size_t n);
+    CardChallenge& setLevel(size_t n);
+
+    // TODO: Add test to prevent nick names > NICK_WIDTH - 1
+    /** setNick
+     *
+     * @param nick      New nick name to assign the player.
+     * @return          Reference to this object.
+     */
+    CardChallenge& setNick(const std::string& n) noexcept;
+
+    /** getNick
+     *
+     * @return          The nick name of the current player.
+     */
+    const std::string& getNick(void) const noexcept;
+
+    /** getLevel
+     *
+     * @return          The current deck level.
+     */
+    size_t getLevel(void) const noexcept;
 
 private:
     Deck deck;                              // the real deck
