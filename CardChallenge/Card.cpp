@@ -1,19 +1,18 @@
 #include "Card.h"
-#include <iostream>     // cout
+#include <iostream>         // cout
 
 /** Table to print card colors
  */
 static const char* colorTable[COLOR + 1] {
-    "Hearts", "Clubs", "Spades", "Diamonds",
-    "" /* No color */
+    COLOR_HEARTS, COLOR_CLUBS, COLOR_SPADES, COLOR_DIAMONDS, COLOR_NO_COLOR
 };
 
 /** Table ot print card values
  */
 static const char* valueTable[VALUE + 1] {
-    "Ace", "Two",  "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
-    "Ten", "Jack", "Queen", "King", "Joker",
-    "" /* No value */
+    VALUE_ACE,   VALUE_TWO,   VALUE_THREE, VALUE_FOUR, VALUE_FIVE, VALUE_SIX,
+    VALUE_SEVEN, VALUE_EIGHT, VALUE_NINE,  VALUE_TEN,  VALUE_JACK, VALUE_QUEEN
+    VALUE_KING,  VALUE_JOKER, VALUE_NO_VALUE
 };
 
 ///////////////////////////// Card /////////////////////////////////////////////
@@ -33,7 +32,7 @@ const Card& Card::view(void) const noexcept
     // Print value and color if any
     std::cout << valueTable[value];
     if (color != COLOR)
-        std::cout << " of " << colorTable[color];
+        std::cout << COLOR_VALUE_SEPARATE << colorTable[color];
     std::cout << std::endl;
 
     return *this;

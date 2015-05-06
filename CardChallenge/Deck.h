@@ -3,6 +3,7 @@
 
 // Libraries
 #include "Card.h"
+#include "DefaultValues.h"
 #include <vector>           // vector
 #include <cstddef>          // size_t
 #include <iterator>         // vector::iterator

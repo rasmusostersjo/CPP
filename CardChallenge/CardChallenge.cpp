@@ -154,7 +154,7 @@ size_t CardChallenge::computeScore(void) noexcept
 CardChallenge& CardChallenge::play(void) noexcept
 {
 
-    std::cout << "Press ENTER to start.";
+    std::cout << S_START;
     deck.shuffle();
     readENTER();
     clearScreen();
@@ -171,21 +171,21 @@ CardChallenge& CardChallenge::play(void) noexcept
         stateCard(i);
 
     // Let user re state cards by index
-    std::cout << std::endl << "Do you want to re state any card? (y/n) ";
+    std::cout << std::endl << Q_ANY_RESTATES;
     bool reState;
     do {
         std::string card_i;
 
         if ( (reState = yes_no()) ) {
-            std::cout << "Enter which card to restate: ";
+            std::cout << S_RESTATE_CARD_INDEX;
             std::cin >> card_i;
             try {
                 stateCard(atoi(card_i.c_str()) - 1);  // stateCard index from 0
             }
             catch (std::range_error) {
-                std::cerr << "Invalid card index." << std::endl;
+                std::cerr << S_INVALID_CARD_INDEX << std::endl;
             }
-            std::cout << "Do you want to re state any other card? (y/n) ";
+            std::cout << Q_RESTATE_ANY_OTHER_CARD;
         }
 
     } while(reState);
@@ -196,13 +196,11 @@ CardChallenge& CardChallenge::play(void) noexcept
     scoreBoard.save();
 
     // Print results
-    std::cout << std::endl << "\tYour score: "  << currentScore.getScore()
-              << "/" << currentScore.getLevel() << std::endl
-              << "\tYour time:  "
-              << std::setprecision(TIME_PRECISION)
-              << currentScore.getTime().count() << "s"
-              << std::endl << std::endl
-              << "Do you want to reveal the entire solution? (y/n) ";
+    std::cout << std::endl << S_YOUR_SCORE << currentScore.getScore()
+              << S_LEVEL_SCORE_SEP << currentScore.getLevel() << std::endl
+              << S_YOUR_TIME << std::setprecision(TIME_PRECISION)
+              << currentScore.getTime().count() << S_TIME_UNIT << std::endl
+              << std::endl << Q_REVEAL_SOLUTION;
     if (yes_no())
         deck.print();
 
