@@ -19,14 +19,12 @@ Score::Score(size_t lv, size_t s, const std::chrono::duration<double>& t,
 {
 }
 
-Score& Score::update(size_t lv, size_t s,
-    const std::chrono::duration<double>& t, const std::string& n)
-    noexcept
+Score& Score::update(const Score& newScore) noexcept
 {
-    level = lv;
-    score = s;
-    time  = t;
-    nick  = n;
+    level = newScore.level;
+    score = newScore.score;
+    time  = newScore.time;
+    nick  = newScore.nick;
 
     return *this;
 }
@@ -34,6 +32,26 @@ Score& Score::update(size_t lv, size_t s,
 bool Score::operator>(const Score& s) const noexcept
 {
     return score == s.score? time < s.time : score > s.score;
+}
+
+size_t Score::getLevel(void) const noexcept
+{
+    return level;
+}
+
+size_t Score::getScore(void) const noexcept
+{
+    return score;
+}
+
+const std::chrono::duration<double>& Score::getTime(void) const noexcept
+{
+    return time;
+}
+
+const std::string& Score::getNick(void) const noexcept
+{
+    return nick;
 }
 
 std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept

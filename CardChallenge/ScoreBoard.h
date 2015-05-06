@@ -40,15 +40,10 @@ public:
 
     /** update; updates the score to the specified values.
      *
-     * @param lv            The game level (difficulty) used.
-     * @param s             The users score.
-     * @param t             The time used viewing the entire deck.
-     * @param nick          Nickname of the high score holder.
+     * @param s             The new score to assign to this score.
      * @return              Reference to this object.
-     * @invalid_argument    Generated if any argument is invalid.
      */
-    Score& update(size_t lv, size_t s, const std::chrono::duration<double>& t,
-        const std::string& n) noexcept;
+    Score& update(const Score& s) noexcept;
 
     /** Larger than operator
      * Returns true if this score is higher than s by comparing:
@@ -58,6 +53,30 @@ public:
      * @return              true/false.
      */
     bool operator>(const Score& s) const noexcept;
+
+    /** getLevel
+     *
+     * @return              Level of the this score.
+     */
+    size_t getLevel(void) const noexcept;
+
+    /** getScore
+     *
+     * @return              Amount of cards that was correctly restated.
+     */
+    size_t getScore(void) const noexcept;
+
+    /** getTime
+     *
+     * @return              Time used to memorize the deck.
+     */
+    const std::chrono::duration<double>& getTime(void) const noexcept;
+
+    /** getNick
+     *
+     * @return              The nick name associated with this score.
+     */
+    const std::string& getNick(void) const noexcept;
 
     /** Overload the << operator
      * Prints nickname, score/level and time, where each fields width is set

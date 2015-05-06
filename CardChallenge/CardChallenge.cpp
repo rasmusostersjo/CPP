@@ -73,7 +73,8 @@ static bool yes_no(void)
 
 CardChallenge::CardChallenge(size_t lv, const std::string& n,
     const ScoreBoard& sb)
-    : deck(lv), scoreDeck(COLOR, JOKER, lv), time(0), nick(n), scoreBoard(sb)
+    : deck(lv), scoreDeck(COLOR, JOKER, lv), nick(n),
+    currentScore(0, 0, std::chrono::duration<double>(0), n)
 {
     try {
         scoreBoard.load();  // Attempt to load high scores
@@ -150,16 +151,11 @@ size_t CardChallenge::computeScore(void) noexcept
     return s;
 }
 
-const std::chrono::duration<double>& CardChallenge::getTimeUsed(void) const
-    noexcept
-{
-    return time;
-}
-
 CardChallenge& CardChallenge::play(void) noexcept
 {
 
     std::cout << "Press ENTER to start.";
+    deck.shuffle();
     readENTER();
     clearScreen();
 
@@ -168,7 +164,7 @@ CardChallenge& CardChallenge::play(void) noexcept
     t1 = std::chrono::system_clock::now();
     view();
     t2 = std::chrono::system_clock::now();
-    time = t2 - t1;
+    std::chrono::duration<double> t = t2 - t1;
 
     // let user re state all cards
     for (size_t i = 0; i < deck.size(); ++i)
@@ -194,14 +190,18 @@ CardChallenge& CardChallenge::play(void) noexcept
 
     } while(reState);
 
-    size_t score = computeScore();
-    scoreBoard.update(Score(deck.size(), score, time, nick)).save();
+    // TODO: Change ret. value of update to indicate if new high score
+    currentScore = Score(deck.size(), computeScore(), t, nick);
+    scoreBoard.update(currentScore);
+    scoreBoard.save();
 
     // Print results
-    std::cout << std::endl   << "\tYour score: "   << computeScore() << "/"
-              << deck.size() << std::endl          << "\tYour time:  "
-              << std::setprecision(TIME_PRECISION) << time.count()   << "s"
-              << std::endl   << std::endl
+    std::cout << std::endl << "\tYour score: "  << currentScore.getScore()
+              << "/" << currentScore.getLevel() << std::endl
+              << "\tYour time:  "
+              << std::setprecision(TIME_PRECISION)
+              << currentScore.getTime().count() << "s"
+              << std::endl << std::endl
               << "Do you want to reveal the entire solution? (y/n) ";
     if (yes_no())
         deck.print();
@@ -220,9 +220,10 @@ CardChallenge& CardChallenge::setLevel(size_t lv)
     if (lv == 0)
         throw std::range_error("CardChallenge::setLevel");
 
-    deck = Deck(lv);                            // reset deck
-    scoreDeck = Deck(COLOR, JOKER, lv);         // reset score deck
-    time = std::chrono::duration<double>(0);    // reset timer
+    // Resize decks and reset current score
+    deck = Deck(lv);
+    scoreDeck = Deck(COLOR, JOKER, lv);
+    currentScore.update(Score(0, 0, std::chrono::duration<double>(0), nick));
 
     return *this;
 }
@@ -241,4 +242,9 @@ const std::string& CardChallenge::getNick(void) const noexcept
 size_t CardChallenge::getLevel(void) const noexcept
 {
     return deck.size();
+}
+
+const Score& CardChallenge::getScore(void) const noexcept
+{
+    return currentScore;
 }
