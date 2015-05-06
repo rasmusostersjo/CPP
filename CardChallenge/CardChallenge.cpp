@@ -23,9 +23,11 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
             scoreBoard.save();  // create the high score file
         }
         catch (write_error) {
-            std::cerr << S_READ_WRITE_ERROR << std::endl;
+            std::cerr << std::endl << S_READ_WRITE_ERROR << std::endl
+                      << std::endl;
         }
-        std::cerr << S_READ_ERROR_WRITE_SUCCESS << std::endl;
+        std::cout << std::endl << S_READ_ERROR_WRITE_SUCCESS << std::endl
+                  << std::endl;
     }
 }
 
@@ -92,7 +94,6 @@ size_t CardChallenge::computeScore(void) noexcept
 
 CardChallenge& CardChallenge::play(void) noexcept
 {
-
     std::cout << S_START;
     deck.shuffle();
     readENTER();
@@ -193,8 +194,11 @@ const CardChallenge& CardChallenge::printLatestScore(void) const noexcept
                   << S_YOUR_TIME << std::setprecision(TIME_PRECISION)
                   << currentScore.getTime().count() << S_TIME_UNIT << std::endl
                   << std::endl << Q_REVEAL_SOLUTION;
-        if (yes_no())
+        if (yes_no()) {
+            std::cout << std::endl;
             deck.print();
+        }
+        std::cout << std::endl;
     }
 
     return *this;

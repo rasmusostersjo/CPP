@@ -21,16 +21,17 @@ int getChoice(void)
     std::string c;
 
     // Let user choose a menu option
-    std::cout << S_ENTER_CHOICE << std::endl;
+    std::cout << S_ENTER_CHOICE;
     std::cin  >> c;
     std::cin.clear();
     
-    if (*c.c_str() < FIRST_OPTION || *c.c_str() > LAST_OPTION) {
+    int choice = *c.c_str() - '0';
+    if (choice < FIRST_OPTION || choice > LAST_OPTION) {
         std::cerr << S_INVALID_CHOICE << std::endl;        
         return INVALID_CHOICE;
     }
     
-    return VALID_CHOICE;
+    return choice;
 }
 
 void readENTER(void)

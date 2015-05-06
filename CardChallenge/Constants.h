@@ -13,7 +13,6 @@
 ///////////////////////////// Helper ///////////////////////////////////////////
 
 #define INVALID_CHOICE 0
-#define VALID_CHOICE   1
 #define FIRST_OPTION   1
 #define LAST_OPTION    5
 
