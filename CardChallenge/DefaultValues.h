@@ -1,7 +1,7 @@
 #ifndef DEFAULT_VALUES_H
 #define DEFAULT_VALUES_H
 
-// Card constants::value
+// Card constants
 #define VALUE_ACE      "Ace"
 #define VALUE_TWO      "Two"
 #define VALUE_THREE    "Three"
@@ -35,6 +35,7 @@
 #define S_READ_ERROR_WRITE_SUCCESS "The high score file was created!"
 #define S_READ_WRITE_ERROR         "Error: Invalid high score file"
 #define S_NO_SCORE "There is no score associated with the current settings."
+#define S_STATE_CARD "State card "
 
 // CardChallenge::play constants
 #define S_START                  "Press enter to start."
@@ -47,6 +48,27 @@
 #define S_YOUR_TIME              "\tYour time:   "
 #define S_TIME_UNIT              "s"
 #define Q_REVEAL_SOLUTION "Do you want to reveal the entire solution? (y/n)"
+
+// CardChallenge::expected restatement values
+#define RESTATE_ACE   'a'
+#define RESTATE_TWO   '2'
+#define RESTATE_THREE '3'
+#define RESTATE_FOUR  '4'
+#define RESTATE_FIVE  '5'
+#define RESTATE_SIX   '6'
+#define RESTATE_SEVEN '7'
+#define RESTATE_EIGHT '8'
+#define RESTATE_NINE  '9'
+#define RESTATE_TEN   '1'
+#define RESTATE_JACK  'j'
+#define RESTATE_QUEEN 'q'
+#define RESTATE_KING  'k'
+#define RESTATE_JOKER 'r'
+
+#define RESTATE_HEARTS   'h'
+#define RESTATE_CLUBS    'c'
+#define RESTATE_DIAMONDS 'd'
+#define RESTATE_SPADES   's'
 
 // ScoreBoard constants
 #define DEFAULT_SCORE_FILE "highScore.txt" // File containing high scores

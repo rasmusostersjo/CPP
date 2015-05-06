@@ -23,10 +23,10 @@ static void clearScreen(void)
 static Color transformColor(const std::string& c)
 {
     switch (*c.c_str()) {
-        case 'h': return HEARTS;   break;
-        case 'c': return CLUBS;    break;
-        case 'd': return DIAMONDS; break;
-        case 's': return SPADES;   break;
+        case RESTATE_HEARTS:   return HEARTS;   break;
+        case RESTATE_CLUBS:    return CLUBS;    break;
+        case RESTATE_DIAMONDS: return DIAMONDS; break;
+        case RESTATE_SPADES:   return SPADES;   break;
     }
 
     return COLOR;   // invalid
@@ -35,22 +35,23 @@ static Color transformColor(const std::string& c)
 static Value transformValue(const std::string& v)
 {
     switch (*v.c_str()) {
-        case 'a': return ACE;   break;
-        case '2': return TWO;   break;
-        case '3': return THREE; break;
-        case '4': return FOUR;  break;
-        case '5': return FIVE;  break;
-        case '6': return SIX;   break;
-        case '7': return SEVEN; break;
-        case '8': return EIGHT; break;
-        case '9': return NINE;  break;
-        case '1': return TEN;   break;
-        case 'j': return JACK;  break;
-        case 'q': return QUEEN; break;
-        case 'k': return KING;  break;
+        case RESTATE_ACE:   return ACE;   break;
+        case RESTATE_TWO:   return TWO;   break;
+        case RESTATE_THREE: return THREE; break;
+        case RESTATE_FOUR:  return FOUR;  break;
+        case RESTATE_FIVE:  return FIVE;  break;
+        case RESTATE_SIX:   return SIX;   break;
+        case RESTATE_SEVEN: return SEVEN; break;
+        case RESTATE_EIGHT: return EIGHT; break;
+        case RESTATE_NINE:  return NINE;  break;
+        case RESTATE_TEN:   return TEN;   break;
+        case RESTATE_JACK:  return JACK;  break;
+        case RESTATE_QUEEN: return QUEEN; break;
+        case RESTATE_KING:  return KING;  break;
+        case RESTATE_JOKER: return JOKER; break;
     }
 
-    return JOKER; // invalid
+    return VALUE; // invalid
 }
 
 /** yes_no
@@ -128,7 +129,7 @@ CardChallenge& CardChallenge::stateCard(size_t i)
     if (i >= deck.size())
         throw std::range_error("Error: CardChallenge::stateCard");
 
-    std::cout << "State card " << i + 1 << ": ";
+    std::cout << S_STATE_CARD << i + 1 << ": ";
     std::cin  >> v >> c;
 
     // Update scoreDeck
