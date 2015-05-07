@@ -4,7 +4,7 @@
 // Libraries
 #include "Driver.h"
 #include "Helper.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include "CardChallenge.h"
 #include <cstdlib>          // srand, atoi
 #include <ctime>            // time

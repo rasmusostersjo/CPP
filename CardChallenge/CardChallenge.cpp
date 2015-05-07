@@ -1,6 +1,6 @@
 #include "CardChallenge.h"
 #include "Exception.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include "Helper.h"
 #include <stdexcept>        // invalid_argument
 #include <iostream>         // cout, cin, cerr, endl
@@ -70,7 +70,16 @@ CardChallenge& CardChallenge::stateCard(size_t i)
         throw std::range_error("Error: CardChallenge::stateCard");
 
     std::cout << S_STATE_CARD << i + 1 << ": ";
+
+#ifdef USE_ENGLISH
+
     std::cin  >> v >> c;
+
+#else /* USE_SWEDISH */
+
+    std::cin >> c >> v;
+
+#endif
 
     // Update scoreDeck
     color = helper::transformColor(c);

@@ -1,5 +1,5 @@
 #include "ScoreBoard.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include "Exception.h"      // write_error, read_error
 #include <stdexcept>        // invalid_argument
 #include <algorithm>        // for_each

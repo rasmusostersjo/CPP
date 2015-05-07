@@ -1,5 +1,5 @@
 #include "Driver.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include <iostream>             // cout, endl, cout, cerr
 #include <string>               // string
 #include <stdexcept>            // range_error

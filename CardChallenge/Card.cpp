@@ -1,5 +1,5 @@
 #include "Card.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include "Constants.h"
 #include <iostream>             // cout, endl
 
@@ -31,11 +31,23 @@ Card::Card(const Color& c, const Value& v)
 
 const Card& Card::view(void) const noexcept
 {
+
+#ifdef USE_ENGLISH
+
     // Print value and color if any
     std::cout << valueTable[value];
     if (color != COLOR)
         std::cout << COLOR_VALUE_SEPARATE << colorTable[color];
     std::cout << std::endl;
+
+#else /* USE_SWEDISH */
+
+    // Print color (if any) and value
+    if (color != COLOR)
+        std::cout << colorTable[color] << COLOR_VALUE_SEPARATE;
+    std::cout << valueTable[value] << std::endl;
+
+#endif
 
     return *this;
 }

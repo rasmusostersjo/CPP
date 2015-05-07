@@ -1,6 +1,6 @@
 #include "Helper.h"
 #include "Constants.h"
-#include "EnglishLanguage.h"
+#include "LanguageSettings.h"
 #include <iostream>             // cin
 #include <string>               // string
 
