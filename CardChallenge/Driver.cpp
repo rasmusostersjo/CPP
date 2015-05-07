@@ -65,20 +65,24 @@ void driver::changeLevel(CardChallenge& c)
     }
 }
 
-// TODO: Implement testing for nick name length
 void driver::changeNickName(CardChallenge& c)
 {
     std::string nick;
 
-    std::cout << S_ENTER_NICK << std::endl;
+    std::cout << S_ENTER_NICK;
     std::cin  >> nick;
     std::cin.clear();
     std::cout << std::endl;
-
-    c.setNick(nick);
+    
+    try {
+        c.setNick(nick);
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_NICK_NAME << std::endl << std::endl;
+    }
 }
 
 void driver::exitCardChallenge(void)
 {
-    std::cout << S_EXIT_MSG << std::endl;
+    std::cout << std::endl << S_EXIT_MSG << std::endl << std::endl;
 }

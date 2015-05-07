@@ -14,7 +14,7 @@
 #define S_ENTER_LEVEL       "Enter new level: "
 #define S_LEVEL_SET_SUCCESS "Level was successfully set!"
 #define S_LEVEL_SET_FAIL    "Error: Invalid level."
-#define S_EXIT_MSG          "Thanks for playing the card challenge!"
+#define S_EXIT_MSG          "gg wp!"
 
 #else
 
@@ -24,7 +24,7 @@
 #define S_ENTER_LEVEL       "Ange ny svårighetsgrad: "
 #define S_LEVEL_SET_SUCCESS "Spelnivån har nu uppdaterats!"
 #define S_LEVEL_SET_FAIL    "Error: Ogiltig nivå."
-#define S_EXIT_MSG          "Tack för att du spelade kortutmaningen!"
+#define S_EXIT_MSG          "gg wp!"
 
 #endif
 
@@ -177,6 +177,8 @@
 #define S_INVALID_HS_FILE "Error: Invalid high score file - no changes applied."
 #define S_READ_ERROR_WRITE_SUCCESS \
     "The high score file was created successfully!"
+#define S_INVALID_NICK_NAME \
+    "Error: Invalid nick name (overflowing the nick name field)."
 
 #define Q_ANY_RESTATES           "Do you want to restate any card? (y/n) "
 #define Q_RESTATE_ANY_OTHER_CARD "Do you want to restate any other card? (y/n) "
@@ -200,6 +202,8 @@
      "Error: Ogiltig highscorefil - inga ändringar sparades."
 #define S_READ_ERROR_WRITE_SUCCESS \
     "Skapade highscorefilen!"
+#define S_INVALID_NICK_NAME \
+    "Error: Ogiltigt användarnamn (för många tecken)."
 
 #define Q_ANY_RESTATES           "Vill du återange något kort? (j/n) "
 #define Q_RESTATE_ANY_OTHER_CARD "Vill du återge något mer kort? (j/n) "

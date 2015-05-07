@@ -16,6 +16,7 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
     newHighScoreFlag(false)
 {
     try {
+        setNick(n);         // Attempt to set nick name
         scoreBoard.load();  // Attempt to load high scores
     }
     catch (read_error) {
@@ -28,6 +29,9 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
         }
         std::cout << std::endl << S_READ_ERROR_WRITE_SUCCESS << std::endl
                   << std::endl;
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_NICK_NAME << std::endl;
     }
 }
 
@@ -168,8 +172,11 @@ CardChallenge& CardChallenge::setLevel(size_t lv)
     return *this;
 }
 
-CardChallenge& CardChallenge::setNick(const std::string& n) noexcept
+CardChallenge& CardChallenge::setNick(const std::string& n)
 {
+    if (n.size() > NICK_WIDTH - 1)
+        throw std::invalid_argument("CardChallenge::setNick");
+
     nick = n;
     return *this;
 }

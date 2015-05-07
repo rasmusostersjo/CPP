@@ -86,13 +86,14 @@ public:
      */
     CardChallenge& setLevel(size_t lv);
 
-    // TODO: Add test to prevent nick names > NICK_WIDTH - 1
     /** setNick
      *
-     * @param nick      New nick name to assign the player.
-     * @return          Reference to this object.
+     * @param nick          New nick name to assign the player.
+     * @return              Reference to this object.
+     * @invalid_argument    Generated if the new nick name would overflow the
+     *                      the nick name field (NICK_WIDTH - 1).
      */
-    CardChallenge& setNick(const std::string& n) noexcept;
+    CardChallenge& setNick(const std::string& n);
 
     /** getNick
      *
