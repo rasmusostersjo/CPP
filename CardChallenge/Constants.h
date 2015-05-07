@@ -1,5 +1,5 @@
-#ifndef DEFAULT_VALUES_H
-#define DEFAULT_VALUES_H
+#ifndef CONSTANTS_H 
+#define CONSTANTS_H
 
 ///////////////////////////// Deck /////////////////////////////////////////////
 
@@ -9,12 +9,6 @@
 ///////////////////////////// CardChallenge ////////////////////////////////////
 
 #define TIME_PRECISION 4        // Use 4-digit precision to print time used
-
-///////////////////////////// Helper ///////////////////////////////////////////
-
-#define INVALID_CHOICE 0
-#define FIRST_OPTION   1
-#define LAST_OPTION    5
 
 ///////////////////////////// ScoreBoard ///////////////////////////////////////
 
@@ -29,11 +23,9 @@
 #define LEVEL_WIDTH 12          // Amount of space for score/level field
 #define TIME_WIDTH  16          // Amount of space for time field
 
-
 ///////////////////////////// Exception ////////////////////////////////////////
 
 #define READ_ERROR  ""          // Default to empty string
 #define WRITE_ERROR ""          // Default to empty string
 
-
-#endif // DEFAULT_VALUES_H
+#endif // CONSTANTS_H

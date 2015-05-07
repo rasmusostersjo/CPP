@@ -4,6 +4,11 @@
 // Libraries
 #include "CardChallenge.h"
 
+// Constants
+#define INVALID_CHOICE 0    // Returned by getChoice if invalid
+#define FIRST_OPTION   1    // First valid choice
+#define LAST_OPTION    5    // Last valid choice
+
 namespace driver {
 
     /** play
