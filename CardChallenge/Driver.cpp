@@ -4,6 +4,7 @@
 #include <string>               // string
 #include <stdexcept>            // range_error
 #include <cstdlib>              // atoi, system
+#include <climits>              // numeric_limits
 
 void driver::menu(void)
 {
@@ -24,6 +25,7 @@ int driver::getChoice(void)
     std::cout << S_ENTER_CHOICE;
     std::cin  >> c;
     std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     int choice = *c.c_str() - '0';
     if (choice < FIRST_OPTION || choice > LAST_OPTION) {
@@ -55,6 +57,7 @@ void driver::changeLevel(CardChallenge& c)
     std::cout << S_ENTER_LEVEL;
     std::cin  >> level;
     std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     try {
         c.setLevel(atoi(level.c_str()));
@@ -71,8 +74,9 @@ void driver::changeNickName(CardChallenge& c)
 
     std::cout << S_ENTER_NICK;
     std::cin  >> nick;
-    std::cin.clear();
     std::cout << std::endl;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     
     try {
         c.setNick(nick);

@@ -31,7 +31,7 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
                   << std::endl;
     }
     catch (std::invalid_argument) {
-        std::cerr << S_INVALID_NICK_NAME << std::endl;
+        std::cerr << S_INVALID_NICK_NAME << std::endl << std::endl;
     }
 }
 

@@ -1,8 +1,27 @@
 #ifndef LANGUAGE_SETTINGS
 #define LANGUAGE_SETTINGS
 
-//#define USE_ENGLISH
-#define USE_SWEDISH
+/** Current language settings:
+ *
+ *  English     -       USE_ENGLISH
+ *  Swedish     -       USE_SWEDISH
+ *
+ *                  Adding a new Language:
+ *                  ----------------------
+ * Required:
+ * ========
+ *  -- LanguageSettings.h
+ *      * Add new else-if:s containing all string-constants defined here.
+ *
+ * Optional:
+ * =========
+ *  -- CardChallenge.cpp
+ *      * Add new else-if @CardChallenge::stateCard()
+ *
+ *  -- Card.cpp
+ *      * Add new else-if @Card::view()
+ */
+#define USE_ENGLISH
 
 ///////////////////////////// Driver ///////////////////////////////////////////
 
@@ -16,7 +35,7 @@
 #define S_LEVEL_SET_FAIL    "Error: Invalid level."
 #define S_EXIT_MSG          "gg wp!"
 
-#else
+#else /* USE_SWEDISH */
 
 #define S_NEW_HIGH_SCORE    "\t!!! Nytt rekord !!!"
 #define S_ENTER_NICK        "Ange användarnamn: "
@@ -26,7 +45,7 @@
 #define S_LEVEL_SET_FAIL    "Error: Ogiltig nivå."
 #define S_EXIT_MSG          "gg wp!"
 
-#endif
+#endif // USE_ENGLISH
 
 ///////////////////////////// Helper ///////////////////////////////////////////
 
@@ -66,7 +85,7 @@
 #define S_LOWER_NO  'n'
 #define S_UPPER_NO  'N'
 
-#else
+#else /* USE_SWEDISH */
 
 #define S_STARS          "\t*********************************"
 #define S_OPTION_1       "\t*    1. Spela                   *"
@@ -102,7 +121,7 @@
 #define S_LOWER_NO  'n'
 #define S_UPPER_NO  'N'
 
-#endif
+#endif // USE_ENGLISH
 
 //////////////////////////// Card //////////////////////////////////////////////
 
@@ -132,7 +151,7 @@
 
 #define COLOR_VALUE_SEPARATE " of "
 
-#else
+#else /* USE_SWEDISH */
 
 #define VALUE_ACE      "Ess"
 #define VALUE_TWO      "Två"
@@ -158,7 +177,7 @@
 
 #define COLOR_VALUE_SEPARATE " "
 
-#endif
+#endif // USE_ENGLISH
 
 ///////////////////////////// CardChallenge ////////////////////////////////////
 
@@ -185,7 +204,7 @@
 #define Q_REVEAL_SOLUTION \
     "Do you want to reveal the entire solution? (y/n) "
 
-#else
+#else /* USE_SWEDISH */
 
 #define S_READ_WRITE_ERROR          "Error: Ogiltig highscorefil."
 #define S_STATE_CARD                "Ange kort "
@@ -209,7 +228,7 @@
 #define Q_RESTATE_ANY_OTHER_CARD "Vill du återge något mer kort? (j/n) "
 #define Q_REVEAL_SOLUTION        "Vill du visa den korrekta lösningen? (j/n) "
 
-#endif
+#endif // USE_ENGLISH
 
 ///////////////////////////// ScoreBoard ///////////////////////////////////////
 
@@ -225,7 +244,7 @@
 #define TIME        "time(s):"
 #define _TIME_      "--------"
 
-#else
+#else /* USE_SWEDISH */
 
 #define TIME_UNIT   "s"
 #define PLAYER      "Användarnamn:"
@@ -237,6 +256,6 @@
 #define TIME        "Tid(s):"
 #define _TIME_      "-------"
 
-#endif
+#endif // USE_ENGLISH
 
 #endif // LANGUAGE_SETTINGS
