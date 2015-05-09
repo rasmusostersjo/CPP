@@ -1,4 +1,3 @@
-// TODO: Fix spacing issue when using å,ä,ö in nicknames (swedish)
 #ifndef LANGUAGE_SETTINGS
 #define LANGUAGE_SETTINGS
 
