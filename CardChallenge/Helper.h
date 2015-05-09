@@ -3,6 +3,7 @@
 
 #include "Card.h"
 #include <string>       // string
+#include <cctype>       // isalnum
 
 namespace helper {
 
@@ -45,6 +46,15 @@ namespace helper {
      * @return          If valid, the card value specified by c; else VALUE.
      */
     Value transformValue(const std::string& c);
+
+    /** validNick
+     * Tests if n is a valid nickname. Here a valid nickname may consist of
+     * a-z, A-Z, 0-9, blank space and underscore.
+     *
+     * @param n         A nickname to validate.
+     * @return          If valid, true; else false.
+     */
+    bool validNick(const std::string& n);
 
 } // helper
 

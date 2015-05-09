@@ -16,7 +16,6 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
     newHighscoreFlag(false)
 {
     try {
-        setNick(n);         // Attempt to set nickname
         scoreboard.load();  // Attempt to load highscores
     }
 
@@ -26,6 +25,7 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
      *      -- The file does not have read permission
      */
     catch (read_error) {
+
         try {
             scoreboard.save();  // Attempt to create new highscore file
         }
@@ -41,9 +41,20 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
                   << std::endl;
     }
 
+    try {
+        setNick(n);         // Attempt to set nickname
+    }
+
     // Generated if the users nickname would overflow the nickname field
-    catch (std::invalid_argument) {
+    catch (std::range_error) {
         std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
+        nick = DEFAULT_NICK;
+    }
+
+    // Generated if the users nickname contained invalid characters
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_NICKNAME_CHARS << std::endl << std::endl;
+        nick = DEFAULT_NICK;
     }
 }
 
@@ -155,6 +166,9 @@ CardChallenge& CardChallenge::setLevel(size_t lv)
 CardChallenge& CardChallenge::setNick(const std::string& n)
 {
     if (n.size() > NICK_WIDTH - 1)
+        throw std::range_error("CardChallenge::setNick");
+
+    if (helper::validNick(n))
         throw std::invalid_argument("CardChallenge::setNick");
 
     nick = n;

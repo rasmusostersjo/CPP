@@ -199,8 +199,10 @@
     "changes applied."
 #define S_READ_ERROR_WRITE_SUCCESS "The highscore file was created " \
     "successfully!"
-#define S_INVALID_NICKNAME        "Error: Invalid nickname (overflowing the "\
-    "nickname field)."
+#define S_INVALID_NICKNAME         "Error: Nickname contained to many " \
+    "characters."
+#define S_INVALID_NICKNAME_CHARS   "Error: Nickname contained invalid " \
+    "characters. "
 
 #define Q_ANY_RESTATES             "Do you want to restate any card? (y/n) "
 #define Q_RESTATE_ANY_OTHER_CARD   "Do you want to restate any other card? " \
@@ -224,8 +226,10 @@
     "associerat med nuvarande inställningar."
 #define S_INVALID_HS_FILE          "Error: Ogiltig highscore-fil - inga " \
     "ändringar sparades."
-#define S_INVALID_NICKNAME        "Error: Ogiltigt användarnamn (för många " \
-    "tecken)."
+#define S_INVALID_NICKNAME         "Error: Användarnamnet innehöll för många " \
+    "tecken."
+#define S_INVALID_NICKNAME_CHARS   "Error: Användarnamnet innehöll ogiltiga " \
+    "tecken."
 
 #define Q_ANY_RESTATES             "Vill du ändra något kort? (j/n) "
 #define Q_RESTATE_ANY_OTHER_CARD   "Vill du ändra något mer kort? (j/n) "

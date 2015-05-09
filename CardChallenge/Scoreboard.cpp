@@ -100,7 +100,9 @@ const Scoreboard& Scoreboard::save(void) const
 
     // Write all current highscores to the highscore file
     std::for_each(highscore.begin(), highscore.end(), [&](const Score& s) {
-        writeFile << s << std::endl;
+        writeFile << s.getNick()  << std::endl << s.getScore() << std::endl
+                  << s.getLevel() << std::endl << s.getTime().count() 
+                  << std::endl;
     } );
     writeFile.close();
 
@@ -118,10 +120,14 @@ Scoreboard& Scoreboard::load(void)
     size_t lv, s, i;
     double t;
     std::string n;
-    for (i = 0; readFile >> std::ws >> n >> std::ws >> s >> std::ws >> lv
-                         >> std::ws >> t && i < highscore.size(); ++i)
+
+    for (i = 0; i < highscore.size(); ++i) {
+        readFile >> std::ws;
+        std::getline(readFile, n);
+        if (!(readFile >> std::ws >> s >> std::ws >> lv >> std::ws >> t))
+            break;
         highscore[i] = Score(lv, s, std::chrono::duration<double>(t), n);
-    readFile.close();
+    }
 
     // Zero out remaining highscores if any
     while (i < highscore.size())
@@ -129,6 +135,7 @@ Scoreboard& Scoreboard::load(void)
 
     return *this;
 }
+
 
 Scoreboard& Scoreboard::rename(const std::string& newHighscoreFile)
 {

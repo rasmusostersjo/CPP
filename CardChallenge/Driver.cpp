@@ -3,7 +3,7 @@
 #include "Driver.h"
 #include "LanguageSettings.h"
 #include <iostream>             // cout, endl, cout, cerr
-#include <string>               // string
+#include <string>               // string, getline
 #include <stdexcept>            // range_error
 #include <cstdlib>              // atoi
 #include <climits>              // numeric_limits
@@ -40,22 +40,22 @@ void driver::changeLevel(CardChallenge& c)
     }
 }
 
-// TODO: Make it possible to have nicknames with spaces
 void driver::changeNickname(CardChallenge& c)
 {
     std::string nick;
 
     std::cout << S_ENTER_NICK;
-    std::cin  >> nick;
+    std::getline(std::cin, nick);
     std::cout << std::endl;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     
     try {
         c.setNick(nick);
     }
-    catch (std::invalid_argument) {
+    catch (std::range_error) {
         std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_NICKNAME_CHARS << std::endl << std::endl;
     }
 }
 

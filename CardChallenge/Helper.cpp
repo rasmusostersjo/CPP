@@ -3,6 +3,8 @@
 #include "LanguageSettings.h"
 #include <iostream>             // cin
 #include <string>               // string
+#include <cctype>               // isalnum
+#include <algorithm>            // find_if
 
 void helper::readENTER(void)
 {
@@ -59,4 +61,11 @@ Value helper::transformValue(const std::string& v)
     }
 
     return VALUE; // invalid
+}
+
+bool helper::validNick(const std::string& n)
+{
+    return std::find_if(n.begin(), n.end(), [](char c) {
+        return !(std::isalnum(c) || c == ' ' || c == '_');
+    }) != n.end();
 }

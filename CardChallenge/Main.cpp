@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 
     helper::clearScreen();
     std::cout << S_ENTER_NICK;
-    std::cin  >> nick;
+    std::getline(std::cin, nick);
 
     // Create a card challenge object and seed shuffle
     CardChallenge cardChallenge(GAME_LEVEL, nick);

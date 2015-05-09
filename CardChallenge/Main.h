@@ -9,7 +9,7 @@
 #include <cstdlib>          // srand, atoi
 #include <ctime>            // time
 #include <iostream>         // cout, cin, cerr, ws,
-#include <string>           // string
+#include <string>           // string, getline
 #include <ctime>            // time
 
 // Constants

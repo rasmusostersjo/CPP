@@ -2,7 +2,7 @@
 #define SCORE_BOARD_H
 
 // Libraries
-#include <string>           // string
+#include <string>           // string, getline
 #include <vector>           // vector
 #include <cstddef>          // size_t
 #include <ostream>          // ostream
@@ -145,7 +145,7 @@ public:
      * loaded.
      *
      * Excepted highscore file format:
-     *      <ws><nick><ws><score><ws><level><ws><time><NL>
+     *      <nick><NL><score><NL><level><NL><time><NL>
      *
      * @return          A reference to this object.
      * @read_error      Generated if the score file can not be read from.
