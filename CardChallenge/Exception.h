@@ -11,7 +11,7 @@ public:
     
     /** (Default) constructor
      *
-     * @param what_arg      Error message.
+     * @param what_arg      An error message.
      */
     write_error(const std::string& what_arg = WRITE_ERROR);
 };
@@ -21,7 +21,7 @@ public:
     
     /** (Default) constructor
      *
-     * @param what_arg      Error message.
+     * @param what_arg      An error message.
      */
     read_error(const std::string& what_arg = READ_ERROR);
 };

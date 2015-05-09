@@ -1,10 +1,63 @@
+/** TODO: Make interface that shows nickname + level or equivalent.
+ */
 #include "Driver.h"
 #include "LanguageSettings.h"
 #include <iostream>             // cout, endl, cout, cerr
 #include <string>               // string
 #include <stdexcept>            // range_error
-#include <cstdlib>              // atoi, system
+#include <cstdlib>              // atoi
 #include <climits>              // numeric_limits
+
+void driver::play(CardChallenge& c)
+{
+    if (c.play().newHighscore())
+        std::cout << std::endl << S_NEW_HIGHSCORE << std::endl;
+    c.printLatestScore();
+}
+
+void driver::viewScoreboard(CardChallenge& c)
+{
+    std::cout << std::endl;
+    c.viewScoreboard();
+    std::cout << std::endl << std::endl;
+}
+
+void driver::changeLevel(CardChallenge& c)
+{
+    std::string level;
+
+    std::cout << S_ENTER_LEVEL;
+    std::cin  >> level;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    try {
+        c.setLevel(std::atoi(level.c_str()));
+        std::cout << S_LEVEL_SET_SUCCESS << std::endl << std::endl;
+    }
+    catch (std::range_error) {
+        std::cerr << S_LEVEL_SET_FAIL << std::endl << std::endl;
+    }
+}
+
+// TODO: Make it possible to have nicknames with spaces
+void driver::changeNickname(CardChallenge& c)
+{
+    std::string nick;
+
+    std::cout << S_ENTER_NICK;
+    std::cin  >> nick;
+    std::cout << std::endl;
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    
+    try {
+        c.setNick(nick);
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
+    }
+}
 
 void driver::menu(void)
 {
@@ -34,56 +87,6 @@ int driver::getChoice(void)
     }
 
     return choice;
-}
-
-void driver::play(CardChallenge& c)
-{
-    if (c.play().newHighScore())
-        std::cout << std::endl << S_NEW_HIGH_SCORE << std::endl;
-    c.printLatestScore();
-}
-
-void driver::viewScoreBoard(CardChallenge& c)
-{
-    std::cout << std::endl;
-    c.viewScoreBoard();
-    std::cout << std::endl << std::endl;
-}
-
-void driver::changeLevel(CardChallenge& c)
-{
-    std::string level;
-
-    std::cout << S_ENTER_LEVEL;
-    std::cin  >> level;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-    try {
-        c.setLevel(atoi(level.c_str()));
-        std::cout << S_LEVEL_SET_SUCCESS << std::endl << std::endl;
-    }
-    catch (std::range_error) {
-        std::cerr << S_LEVEL_SET_FAIL << std::endl << std::endl;
-    }
-}
-
-void driver::changeNickName(CardChallenge& c)
-{
-    std::string nick;
-
-    std::cout << S_ENTER_NICK;
-    std::cin  >> nick;
-    std::cout << std::endl;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    
-    try {
-        c.setNick(nick);
-    }
-    catch (std::invalid_argument) {
-        std::cerr << S_INVALID_NICK_NAME << std::endl << std::endl;
-    }
 }
 
 void driver::exitCardChallenge(void)

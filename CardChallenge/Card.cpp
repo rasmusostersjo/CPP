@@ -1,6 +1,5 @@
 #include "Card.h"
 #include "LanguageSettings.h"
-#include "Constants.h"
 #include <iostream>             // cout, endl
 
 /** Table to print card colors
@@ -9,11 +8,11 @@ static const char* colorTable[COLOR + 1] {
     COLOR_HEARTS, COLOR_CLUBS, COLOR_SPADES, COLOR_DIAMONDS, COLOR_NO_COLOR
 };
 
-/** Table ot print card values
+/** Table to print card values
  */
 static const char* valueTable[VALUE + 1] {
     VALUE_ACE,   VALUE_TWO,   VALUE_THREE, VALUE_FOUR, VALUE_FIVE, VALUE_SIX,
-    VALUE_SEVEN, VALUE_EIGHT, VALUE_NINE,  VALUE_TEN,  VALUE_JACK, VALUE_QUEEN
+    VALUE_SEVEN, VALUE_EIGHT, VALUE_NINE,  VALUE_TEN,  VALUE_JACK, VALUE_QUEEN,
     VALUE_KING,  VALUE_JOKER, VALUE_NO_VALUE
 };
 
@@ -34,7 +33,7 @@ const Card& Card::view(void) const noexcept
 
 #ifdef USE_ENGLISH
 
-    // Print value and color if any
+    // Print value, then color (if any)
     std::cout << valueTable[value];
     if (color != COLOR)
         std::cout << COLOR_VALUE_SEPARATE << colorTable[color];
@@ -42,7 +41,7 @@ const Card& Card::view(void) const noexcept
 
 #else /* USE_SWEDISH */
 
-    // Print color (if any) and value
+    // Print color (if any), then value
     if (color != COLOR)
         std::cout << colorTable[color] << COLOR_VALUE_SEPARATE;
     std::cout << valueTable[value] << std::endl;

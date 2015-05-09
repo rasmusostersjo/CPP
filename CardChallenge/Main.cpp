@@ -18,9 +18,9 @@ int main(int argc, char *argv[])
 
         switch (choice) {
             case 1: driver::play(cardChallenge);           break;
-            case 2: driver::viewScoreBoard(cardChallenge); break;
+            case 2: driver::viewScoreboard(cardChallenge); break;
             case 3: driver::changeLevel(cardChallenge);    break;
-            case 4: driver::changeNickName(cardChallenge); break;
+            case 4: driver::changeNickname(cardChallenge); break;
             case 5: driver::exitCardChallenge();
             default: continue;                             break;
         }

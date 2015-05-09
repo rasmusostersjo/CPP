@@ -4,14 +4,18 @@
 // Libraries
 #include "Constants.h"
 
-/** Data type for a cards value
+/** Card value data type
+ * Here VALUE states the amount of different card values and may also be used
+ * to signal no value.
  */
 typedef enum {
     ACE,  TWO,   THREE, FOUR,  FIVE, SIX, SEVEN, EIGHT, NINE, TEN,
     JACK, QUEEN, KING,  JOKER, VALUE
 } Value;
 
-/** Data type for a cards color
+/** Card color data type
+ * Here COLOR states the amount of different card colors and may also be used
+ * to signal no color.
  */
 typedef enum {
     HEARTS, CLUBS, SPADES, DIAMONDS, COLOR
@@ -20,11 +24,16 @@ typedef enum {
 class Card {
 public:
     
-    /** Default constructor; intializes the card with a Joker
+    /** Default constructor
+     * Initializes this card with no color and a joker.
      */
     Card(void);
 
-    /** Constructur; initializes the card according to value and color
+    /** Constructor
+     * Initializes this card with a color and value.
+     *
+     * @param c         The color to assign to this card.
+     * @param v         The value to asign to this card.
      */
     Card(const Color& c, const Value& v);
 
@@ -36,9 +45,10 @@ public:
     Card& operator=(const Card&) = default;
     Card& operator=(Card&&)      = default;
 
-    /** view; Prints card information to stdin
+    /** view
+     * Prints this cards color and value.
      *
-     * @return          Constant reference to this object.
+     * @return          A constant reference to this object.
      */
     const Card& view(void) const noexcept;
 
@@ -56,24 +66,27 @@ public:
     
     /** setColor
      *
-     * @param c         Color to assign to this card.
-     * @return          Constant reference to this object.
+     * @param c         A color to assign to this card.
+     * @return          A reference to this object.
      */
     Card& setColor(const Color& c) noexcept;
 
     /** setValue
      *
-     * @param v         Value to assign to this card.
-     * @return          Constant reference to this object.
+     * @param v         A value to assign to this card.
+     * @return          A reference to this object.
      */
     Card& setValue(const Value& v) noexcept;
 
     /** Equal to operator
+     * Here two cards are defined as equal if both value and color matches.
+     *
+     * @return          If this card was equal to c, true; else false.
      */
     bool operator==(const Card& c);
     
 private:
-
+    
     Color color;
     Value value;
 };

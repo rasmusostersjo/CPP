@@ -3,8 +3,8 @@
 
 // Libraries
 #include "Deck.h"
-#include "ScoreBoard.h"
 #include "Constants.h"
+#include "Scoreboard.h"
 #include <cstddef>       // size_t
 #include <chrono>        // to measure time
 #include <string.h>      // string
@@ -16,14 +16,16 @@ public:
 // Life cycle
 
     /** (Default) constructor
-     * The lv-parameter chooses the card challenge difficulty, but may be
-     * omitted if default settings is to be used.
+     * Initializes a new cardChallenge object with an optional level, nickname
+     * and scoreboard.
      *
-     * @param lv        Initialized the lv of the card challenge.
+     * @param lv        The level of this cardChallenge.
+     * @param nick      The user nickname.
+     * @param sb        A scoreboard associated with a highscore file.
      */
     CardChallenge(size_t lv = DEFAULT_LV,
         const std::string& nick = DEFAULT_NICK,
-        const ScoreBoard& sb = ScoreBoard(DEFAULT_SCORE_FILE, DEFAULT_HS_SIZE));
+        const Scoreboard& sb = Scoreboard(DEFAULT_SCORE_FILE, DEFAULT_HS_SIZE));
 
     /** Use the compiler defaults
      */
@@ -35,123 +37,170 @@ public:
     
 // Member functions associated with game play and score
 
-    /** play; starts the card challenge
+    /** play
+     * Lets the user play one round with the current CardChallenge settings. The
+     * play() function provides the following:
+     *  1. Shuffles the deck prior to a new game by calling Deck::Shuffle().
+     *  2. Interacts with the user at all stages of the game:
+     *          a) Prior to the card challenge start, to ensure that the user is
+     *             ready.
+     *          b) During the card challenge, to let the user view and restate
+     *             cards.
+     *          c) After the card challenge, to print results and optionally
+     *             view the correct solution.
      *
-     * @return          Constant reference to this object.
+     * @return          A constant reference to this object.
      */
     CardChallenge& play(void) noexcept;
 
-    /** printLatestScore;
-     * Prints the last score and lets the user reveal the entire solution.
-     * If the latest score is invalid (i.e. set to 0/0/0/DEFAULT_NICK) an error
+    /** viewScoreboard
+     * Prints all highscores.
+     *
+     * @return          A constant reference to this object.
+     */
+    const CardChallenge& viewScoreboard(void) const noexcept;
+
+    /** printLatestScore
+     * Prints the latest score and lets the user reveal the entire solution.
+     * If there is no latest score, i.e. it is set to (0, 0, 0, ...), an error
      * message is printed.
      *
-     * @return          Constant reference to this object.
+     * @return          A constant reference to this object.
      */
     const CardChallenge& printLatestScore(void) const noexcept;
 
-    /** newHighScore
-     * States if the current score was a new high score or not.
+    /** newHighscore
+     * States if the latest score (currentScore) was a new highscore or not.
      *
-     * @return          true/false.
+     * @return          If latest score was a new highscore true; else false.
      */
-    bool newHighScore(void) const noexcept;
+    bool newHighscore(void) const noexcept;
 
-    /** shuffle; note that srand() must be seeded
+    /** shuffle
+     * Shuffles the deck by calling Deck::shuffle(). Note that the the shuffle()
+     * function does not provide any seeding.
      *
-     * @return          Reference to this object.
+     * @return          A reference to this object.
      */
     CardChallenge& shuffle(void) noexcept;
 
-    /** viewScoreBoard; prints all high scores
-     *
-     * @return          Constant reference to this object.
-     */
-    const CardChallenge& viewScoreBoard(void) const noexcept;
-
 // Set and get member functions
-
-    /** getScore
-     *
-     * @return          Current score; always set to (0, 0, 0, ...) to
-     *                  signal no current score.
-     */
-    const Score& getScore(void) const noexcept;
 
     /** setLevel
      *
-     * @param lv        New level to assign to the deck.
-     * @return          Reference to this object.
+     * @param lv        A new level to assign to this card challenge.
+     * @return          A reference to this object.
      * @range_error     Generated if lv is less than 1.
      */
     CardChallenge& setLevel(size_t lv);
 
     /** setNick
      *
-     * @param nick          New nick name to assign the player.
-     * @return              Reference to this object.
-     * @invalid_argument    Generated if the new nick name would overflow the
-     *                      the nick name field (NICK_WIDTH - 1).
+     * @param nick          A new nickname to assign the player.
+     * @return              A reference to this object.
+     * @invalid_argument    Generated if the new nickname would overflow the
+     *                      the nickname field (NICK_WIDTH - 1).
      */
     CardChallenge& setNick(const std::string& n);
 
-    /** getNick
+    // TODO: Factor out error message and generate exception
+    /** setHighscoreFile
      *
-     * @return          The nick name of the current player.
+     * @return          A reference to this object.
      */
-    const std::string& getNick(void) const noexcept;
+    CardChallenge& setHighscoreFile(const std::string& hsf);
 
     /** getLevel
      *
-     * @return          The current deck level.
+     * @return          The current level setting.
      */
     size_t getLevel(void) const noexcept;
 
-    /** setHighScoreFile
+    /** getNick
      *
-     * @return          Reference to this object.
+     * @return          The nickname of the current player.
      */
-    CardChallenge& setHighScoreFile(const std::string& hsf);
+    const std::string& getNick(void) const noexcept;
+
+    /** getScore
+     *
+     * @return          The current score.
+     */
+    const Score& getScore(void) const noexcept;
 
 private:
 
-    Deck deck;              // the original deck
-    Deck scoreDeck;         // to keep track of restatements
+    /** deck
+     * This is the card challenge deck that the user must restate.
+     */
+    Deck deck;
+
+    /** scoreDeck
+     * This is the deck that the user enter their restatements to.
+     */
+    Deck scoreDeck;
+
+    /** nick
+     * The nickname of the current user.
+     */
     std::string nick;
+
+    /** currentScore
+     * Provides information about the latest score such as level, score,
+     * time used and nickname.
+     *
+     * Note that the currentScore variable is set to (0, 0, 0, ...) to signal
+     * that no current score is available.
+     */
     Score currentScore;
-    bool newHighScoreFlag;
-    ScoreBoard scoreBoard;
+
+    /** newHighscoreFlag
+     * Is set to false if the currentScore was a new highscore, else it is set
+     * to true.
+     */
+    bool newHighscoreFlag;
+
+    /** scoreboard
+     * The scoreboard that is associated with this card challenge.
+     */
+    Scoreboard scoreboard;
 
 // Helper functions
 
     /** view
-     * Views the entire deck one card at a time. Here the user must enter ENTER
-     * to proceed to the next card.
+     * Views the entire deck one card at a time. Here the user must provide an
+     * ENTER every time a new card is to be viewed.
      *
-     * @return          Constant reference to this object.
+     * @return          A constant reference to this object.
      */
     const CardChallenge& view(void) const noexcept;
 
     /** view
-     * Views one card specified by i. Here the user must enter ENTER prior to
-     * the function returning.
+     * Views the card associated with index i in the card challenge deck (deck).
+     * Similarly to the view() function that prints the entire deck, the user
+     * must provide an ENTER prior to proceeding.
      *
-     * @return          Constant reference to this object.
-     * @range_error     Generated if the index i is out of range.
+     * @return          A constant reference to this object.
+     * @range_error     Generated if the index i was out of range.
      */
     const CardChallenge& view(size_t i) const;
 
     /** stateCard
-     * Lets the user state card_i and updates scoreDeck accordingly.
+     * Lets the user restate card_i and updates the score deck (scoreDeck)
+     * accordingly.
      *
-     * @param i         Index of the next card to state.
-     * @return          Reference to this object.
-     * @range_error     Genererated if i is not a valid index.
+     * Note that cards may be restated in various ways, depending on the current
+     * language settings.
+     *
+     * @param i         The index of the next card to restate.
+     * @return          A reference to this object.
+     * @range_error     Generated if i is was out of range.
      */
     CardChallenge& stateCard(size_t i);
 
     /** computeScore
-     * Computes the user score by comparing deck and scoreDeck.
+     * Computes the users score by comparing the card challenge deck (deck) and
+     * the score deck (scoreDeck) one card at a time.
      * 
      * @return          The user score.
      */

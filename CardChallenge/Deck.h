@@ -11,29 +11,32 @@
 class Deck {
 public:
     
-    /** Default constructur
-     * Intialized the deck with n cards. First Ace-King hearts are added,
-     * then clubs, diamonds and spades. Thus, if less or more cards than the
-     * amount of distinct cards are requested there may be missing cards or
-     * multiple instances.
+    /** Default constructor
+     * Initializes the deck with n cards (in cycles) according to:
+     *      Ace of Hearts,   Two of Hearts,   ..., King of Hearts,
+     *      Ace of Clubs,    Two of Clubs,    ..., King of Clubs,
+     *      Ace of Spades,   Two of Spades,   ..., King of Spaces,
+     *      Ace of Diamonds, Two of Diamonds, ..., King of Diamonds.
+     * Thus, for n = 13 the deck contains Ace-King of Hearts. Similarly, for
+     * n = 53 the deck contains each card once and Ace of Hearts twice.
      *
-     * @param n         Amount of cards to assign the deck.
+     * @param n         The amount of cards to assign to this deck.
      */
     Deck(size_t n = DEFAULT_DECK_SIZE);
 
     /** Constructor
-     * Intialized the deck with n cards of color c and value v.
+     * Initializes the deck with n cards of color c and value v.
      *
-     * @param c         Color to assign all cards.
-     * @param v         Value to assign all cards.
-     * @param n         Amount of cards to assign the deck.
+     * @param c         The color to assign to all cards.
+     * @param v         The value to assign to all cards.
+     * @param n         The amount of cards to assign to this deck.
      */
     Deck(const Color& c, const Value& v, size_t n = DEFAULT_DECK_SIZE);
 
     /** Assignment operator
      *
      * @param d         A deck to copy to this deck.
-     * @return          Reference to this object.
+     * @return          A reference to this object.
      */
     Deck& operator=(const Deck& d);
 
@@ -44,44 +47,51 @@ public:
     ~Deck(void)             = default;
     Deck& operator=(Deck&&) = default;
 
-    /** print; prints the entire deck.
+    /** print
+     * Prints the entire deck.
      *
-     * @return          Constant reference to this object.
+     * @return          A constant reference to this object.
      */
     const Deck& print(void) const noexcept;
 
-    /** print; prints the card specified by i.
+    /** print
+     * Prints the card at index i (deck). Note that the print() function indexes
+     * in [0, n), where n is the deck size.
      *
-     * @param i         Index of the deck card to print.
-     * @return          Constant reference to this object.
-     *
-     * @range_error     Generated if i is larger than the deck size.
+     * @param i         The deck-index of the card to print.
+     * @return          A constant reference to this object.
+     * @range_error     Generated if i is larger or equal to the deck size.
      */
     const Deck& print(size_t i) const;
 
     /** getCard
+     * Similarly to the Deck::print() function, the getCard() function indexes
+     * in [0, n).
      *
-     * @param i         Index of a the card to get; index from 0, 1, ...
-     * @return          The card indexed by i.
+     * Note that getCard() function allows the cards value and/or color to be
+     * modified by calling Card::setColor() and/or Card::setValue().
+     *
+     * @param i         The deck-index of the card to grab.
+     * @return          A reference to the card indexed by i.
+     * @range_error     Generated if i is larger or equal to the deck size.
      */
     Card& getCard(size_t i);
 
-    /** shuffle; shuffles the entire deck.
+    /** shuffle
+     * Shuffles the entire deck by using the STL-algorithm std::shuffle.
      *
-     * @return          Reference to this object.
+     * @return          A reference to this object.
      */
     Deck& shuffle(void) noexcept;
 
     /** size
      * 
-     * @param return        The size of this deck.
+     * @param return    The size of this deck.
      */
     size_t size(void) const noexcept;
 
 private:
     
-    /** Let the deck be a vector of cards
-     */
     std::vector<Card> deck;
 };
 

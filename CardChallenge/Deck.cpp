@@ -9,8 +9,6 @@ Deck::Deck(size_t n)
     Color c = HEARTS;
 
     std::for_each(deck.begin(), deck.end(), [&v, &c](Card& k) {
-
-        // Initialize card
         k.setColor(c).setValue(v);
 
         // Increment value and color in cycles; dont assign jokers
@@ -24,12 +22,19 @@ Deck::Deck(const Color& c, const Value& v, size_t n)
 {
     // Initialize all cards to color c and value v
     std::for_each(deck.begin(), deck.end(), [=](Card& k) {
-        k.setColor(c).setValue(v); } );
+        k.setColor(c).setValue(v);
+    } );
+}
+
+Deck& Deck::operator=(const Deck& d)
+{
+    deck.assign(d.deck.begin(), d.deck.end());
+    return *this;
 }
 
 const Deck& Deck::print(void) const noexcept
 {
-    std::for_each(deck.begin(), deck.end(), [](Card k) { k.view(); } );
+    std::for_each(deck.begin(), deck.end(), [](const Card &k) { k.view(); } );
     return *this;
 }
 
@@ -59,10 +64,4 @@ Deck& Deck::shuffle(void) noexcept
 size_t Deck::size(void) const noexcept
 {
     return deck.size();
-}
-
-Deck& Deck::operator=(const Deck& d)
-{
-    deck.assign(d.deck.begin(), d.deck.end());
-    return *this;
 }
