@@ -28,4 +28,8 @@
 #define READ_ERROR  ""          // Default to the empty string
 #define WRITE_ERROR ""          // Default to the empty string
 
+///////////////////////////// Helper ///////////////////////////////////////////
+
+#define CLEAR_SCREEN 1024       // Amount of NLs when clearing the screen
+
 #endif // CONSTANTS_H

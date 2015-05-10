@@ -12,9 +12,10 @@ namespace helper {
      */
     void readENTER(void);
 
-    // TODO: Implement new-line looping to prevent look-up cheating
     /** clearScreen
-     * Clears the screen by calling system("clear").
+     * Clears the screen by printing CLEAR_SCREEN new lines. Note that we do not
+     * want to use system("clear") here, since then the user could potentially
+     * do some look-up cheating in the terminal.
      */
     void clearScreen(void);
 

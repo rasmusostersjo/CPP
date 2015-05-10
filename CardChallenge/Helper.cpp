@@ -14,7 +14,8 @@ void helper::readENTER(void)
 
 void helper::clearScreen(void)
 {
-    system("clear");
+    for (size_t i = 0; i < CLEAR_SCREEN; ++i)
+        std::cout << std::endl;
 }
 
 bool helper::yes_no(void)
