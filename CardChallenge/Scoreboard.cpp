@@ -101,7 +101,6 @@ const Scoreboard& Scoreboard::save(void) const
                   << s.getLevel() << std::endl << s.getTime().count() 
                   << std::endl;
     } );
-    writeFile.close();
 
     return *this;
 }
@@ -139,6 +138,7 @@ Scoreboard& Scoreboard::rename(const std::string& newHighscoreFile)
     std::string oldHighscoreFile = highscoreFile;
     try {
         highscoreFile = newHighscoreFile;
+        load();
     }
     catch (read_error) {
         highscoreFile = oldHighscoreFile;
