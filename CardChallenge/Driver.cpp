@@ -1,5 +1,3 @@
-/** TODO: Make interface that shows nickname + level or equivalent.
- */
 #include "Driver.h"
 #include "LanguageSettings.h"
 #include <iostream>             // cout, endl, cout, cerr
@@ -20,6 +18,12 @@ void driver::viewScoreboard(CardChallenge& c)
     std::cout << std::endl;
     c.viewScoreboard();
     std::cout << std::endl << std::endl;
+}
+
+void driver::viewCurrentSettings(const CardChallenge& c)
+{
+    std::cout << "Nickname: " << c.getNick()
+              << "Level: "    << c.getLevel() << std::endl << std::endl;
 }
 
 void driver::changeLevel(CardChallenge& c)
@@ -67,6 +71,7 @@ void driver::menu(void)
               << S_OPTION_3 << std::endl
               << S_OPTION_4 << std::endl
               << S_OPTION_5 << std::endl
+              << S_OPTION_6 << std::endl
               << S_STARS    << std::endl;
 }
 

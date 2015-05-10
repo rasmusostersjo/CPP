@@ -32,13 +32,11 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
 
         // Could not write to the highscore file
         catch (write_error) {
-            std::cerr << std::endl << S_READ_WRITE_ERROR << std::endl
-                      << std::endl;
+            std::cerr << S_READ_WRITE_ERROR << std::endl << std::endl;
         }
 
         // Succeeded to create a new highscore file
-        std::cout << std::endl << S_READ_ERROR_WRITE_SUCCESS << std::endl
-                  << std::endl;
+        std::cout << S_READ_ERROR_WRITE_SUCCESS << std::endl << std::endl;
     }
 
     try {
@@ -177,13 +175,7 @@ CardChallenge& CardChallenge::setNick(const std::string& n)
 
 CardChallenge& CardChallenge::setHighscoreFile(const std::string& hsf)
 {
-    try {
-        scoreboard.rename(hsf);
-    }
-    catch (std::invalid_argument) {
-        std::cerr << S_INVALID_HS_FILE << std::endl;
-    }
-
+    scoreboard.rename(hsf);
     return *this;
 } 
 

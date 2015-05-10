@@ -103,10 +103,11 @@ public:
      */
     CardChallenge& setNick(const std::string& n);
 
-    // TODO: Factor out error message and generate exception
     /** setHighscoreFile
      *
-     * @return          A reference to this object.
+     * @return              A reference to this object.
+     * @invalid_argument    Generated if the highscore file was invalid (the old
+     *                      highscore file then remains unchanged).
      */
     CardChallenge& setHighscoreFile(const std::string& hsf);
 

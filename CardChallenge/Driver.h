@@ -7,7 +7,7 @@
 // Constants
 #define INVALID_CHOICE 0    // Returned by getChoice() if invalid entry
 #define FIRST_OPTION   1    // First valid menu choice
-#define LAST_OPTION    5    // Last valid menu choice
+#define LAST_OPTION    6    // Last valid menu choice
 
 namespace driver {
 
@@ -25,6 +25,13 @@ namespace driver {
      * @param c     A reference to a CardChallenge object.
      */
     void viewScoreboard(CardChallenge& c);
+
+    /** viewCurrentSettings
+     * Prints the user nickname and current level.
+     *
+     * @param c     A constant reference to a CardChallenge object.
+     */
+    void viewCurrentSettings(const CardChallenge& c);
 
     /** changeLevel
      * Lets the user set a new card challenge level.

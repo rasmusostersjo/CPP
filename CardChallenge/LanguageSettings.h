@@ -51,12 +51,13 @@
 
 #ifdef USE_ENGLISH 
 
-#define S_STARS          "\t*****************************"
-#define S_OPTION_1       "\t*    1. Play                *"
-#define S_OPTION_2       "\t*    2. View highscores     *"
-#define S_OPTION_3       "\t*    3. Change level        *"
-#define S_OPTION_4       "\t*    4. Change nickname     *"
-#define S_OPTION_5       "\t*    5. Exit                *"
+#define S_STARS          "\t**********************************"
+#define S_OPTION_1       "\t*    1. Play                     *"
+#define S_OPTION_2       "\t*    2. View highscores          *"
+#define S_OPTION_3       "\t*    3. View current Settings    *"
+#define S_OPTION_4       "\t*    4. Change level             *"
+#define S_OPTION_5       "\t*    5. Change nickname          *"
+#define S_OPTION_6       "\t*    6. Exit                     *"
 #define S_ENTER_CHOICE   "Enter choice: "
 #define S_INVALID_CHOICE "Error: Invalid choice."
 
@@ -87,12 +88,13 @@
 
 #else /* USE_SWEDISH */
 
-#define S_STARS          "\t*********************************"
-#define S_OPTION_1       "\t*    1. Spela                   *"
-#define S_OPTION_2       "\t*    2. Visa highscore          *"
-#define S_OPTION_3       "\t*    3. Ändra svårighetsgrad    *"
-#define S_OPTION_4       "\t*    4. Ändra användarnamn      *"
-#define S_OPTION_5       "\t*    5. Avsluta                 *"
+#define S_STARS          "\t*****************************************"
+#define S_OPTION_1       "\t*    1. Spela                           *"
+#define S_OPTION_2       "\t*    2. Visa highscore                  *"
+#define S_OPTION_3       "\t*    3. Visa nuvarande inställningar    *"
+#define S_OPTION_4       "\t*    4. Ändra svårighetsgrad            *"
+#define S_OPTION_5       "\t*    5. Ändra användarnamn              *"
+#define S_OPTION_6       "\t*    6. Avsluta                         *"
 #define S_ENTER_CHOICE   "Ange ditt val: "
 #define S_INVALID_CHOICE "Error: Ogiltigt val."
 
