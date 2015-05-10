@@ -20,10 +20,7 @@ Deck::Deck(size_t n)
 Deck::Deck(const Color& c, const Value& v, size_t n)
     : deck(n)
 {
-    // Initialize all cards to color c and value v
-    std::for_each(deck.begin(), deck.end(), [=](Card& k) {
-        k.setColor(c).setValue(v);
-    } );
+    std::fill(deck.begin(), deck.end(), Card(c, v));
 }
 
 Deck& Deck::operator=(const Deck& d)

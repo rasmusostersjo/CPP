@@ -76,19 +76,16 @@ Scoreboard::Scoreboard(const std::string& hsf, size_t hss)
 
 bool Scoreboard::update(const Score& sc) noexcept
 {
-    // Decide where (if) to insert the new highscore
-    auto rit = --highscore.rbegin();
-    std::for_each(highscore.rbegin(), highscore.rend(), [&](const Score& s) {
-        if (sc > s) ++rit;
-    } );
-
-    // Insert new highscore
-    if (rit != highscore.rbegin() - 1) {
-        highscore.insert((rit + 1).base(), sc);
+    auto it = std::find_if(highscore.begin(), highscore.end(),
+        [sc](const Score& s) { return sc > s; } );
+    
+    if (it != highscore.end()) {
+        highscore.insert(it, sc);
         highscore.pop_back();
+        return true;
     }
 
-    return rit != highscore.rbegin() - 1;
+    return false;
 }
 
 const Scoreboard& Scoreboard::save(void) const
