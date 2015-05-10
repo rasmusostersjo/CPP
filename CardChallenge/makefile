@@ -29,8 +29,8 @@ $(EXE): $(OBJ) $(HEADER)
 %.o: %.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 
-# Test run EXE
-test:  $(EXE)
+# Run card challenge
+play:  $(EXE)
 	./$(EXE) 
 
 # Clean up all object files
