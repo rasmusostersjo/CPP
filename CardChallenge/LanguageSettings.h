@@ -36,10 +36,9 @@
 #define S_EXIT_MSG          "gg wp!"
 #define S_ENTER_HSF         "Enter new highscore file: "
 #define S_VALID_HSF         "The new highscore file was set successfully!"
-#define S_INVALID_HSF       "Error: Invalid highscore file (no changes " \
-    "applied."
+#define S_INVALID_HSF       "Error: Invalid highscore file."
 #define S_SAVE_ERROR        "Error: Could not save to the specified " \
-    "highscore file.)"
+    "highscore file."
 
 #else /* USE_SWEDISH */
 
@@ -54,7 +53,7 @@
 #define S_VALID_HSF         "Highscorefilen har nu uppdaterats!"
 #define S_INVALID_HSF       "Error: Ogiltig highscorefil."
 #define S_SAVE_ERROR        "Error: Kunde inte spara till den angivna " \
-    "highscorefilen.)"
+    "highscorefilen."
 
 #endif // USE_ENGLISH
 
