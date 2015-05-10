@@ -7,67 +7,66 @@ at compile time. If one whiches to add another language, see instructions in the
 LanguageSettings header.
 
 <br/>
-To compile, type 'make'. In order to start the card challenge, type 'make play'
-or './Main'.
+
+To compile, type 'make'.<br/>
+In order to start the card challenge, type 'make play' or './Main'.
 
 Restating cards (English):
 ==========================
-Cards are restated as <value> <color>, using the hotkeys as below.
+Cards are restated as 'value' 'color' (using the hotkeys below).
 
 <br/>
 
-Ace: 'a'
-Two: '2'
-Three: '3'
-Four: '4'
-Five: '5'
-Six: '6'
-Seven: '7'
-Eight: '8'
-Nine: '9'
-Ten: '1' (!)
-Jack: 'j'
-Queen: 'q'
-King: 'k'
-Joker: 'j'
+Ace: 'a' <br/>
+Two: '2'<br/>
+Three: '3'<br/>
+Four: '4'<br/>
+Five: '5'<br/>
+Six: '6'<br/>
+Seven: '7'<br/>
+Eight: '8'<br/>
+Nine: '9'<br/>
+Ten: '1' (!)<br/>
+Jack: 'j'<br/>
+Queen: 'q'<br/>
+King: 'k'<br/>
+Joker: 'j'<br/>
 
 <br/>
 
-Hearts: 'h'
-Clubs: 'c'
-Spades: 's'
-Diamonds: 'd'
+Hearts: 'h'<br/>
+Clubs: 'c'<br/>
+Spades: 's'<br/>
+Diamonds: 'd'<br/>
 
 <br/>
 As an example, Jack of Hearts would be restated as "j h".
 
 Restating cards (Swedish):
 ==========================
-Cards are restated as <color> <value>, using the hotkeys as below.
+Cards are restated as 'color' 'value' (using the hotkeys below).
 
 <br/>
 
-Ace: 'e'
-Two: '2'
-Three: '3'
-Four: '4'
-Five: '5'
-Six: '6'
-Seven: '7'
-Eight: '8
-Nine: '9'
-Ten: '1' (!)
-Jack: 'n'
-Queen: 'd'
-King: 'k'
-Joker: 'j'
+Ace: 'e'<br/>
+Two: '2'<br/>
+Three: '3'<br/>
+Four: '4'<br/>
+Five: '5'<br/>
+Six: '6'<br/>
+Seven: '7'<br/>
+Eight: '8<br/>
+Nine: '9'<br/>
+Ten: '1' (!)<br/>
+Jack: 'n'<br/>
+Queen: 'd'<br/>
+King: 'k'<br/>
+Joker: 'j'<br/>
 
-<br/>
-
-Hearts: 'h'
-Clubs: 'r'
-Spades: 's'
-Diamonds: 'k'
+Hearts: 'h'<br/>
+Clubs: 'r'<br/>
+Spades: 's'<br/>
+Diamonds: 'k'<br/>
 
 <br/>
 As an example, Ace of Spaces would be restated as "s e".
