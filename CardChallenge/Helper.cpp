@@ -66,7 +66,12 @@ Value helper::transformValue(const std::string& v)
 
 bool helper::validNick(const std::string& n)
 {
+    // Dont allow empty nickname or only spaces
+    if (std::find_if(n.begin(), n.end(),
+        [](char c) { return c != ' '; }) == n.end())
+        return false;
+
     return std::find_if(n.begin(), n.end(), [](char c) {
         return !(std::isalnum(c) || c == ' ' || c == '_');
-    }) != n.end();
+    }) == n.end();
 }

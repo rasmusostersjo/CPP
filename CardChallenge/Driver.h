@@ -7,7 +7,7 @@
 // Constants
 #define INVALID_CHOICE 0    // Returned by getChoice() if invalid entry
 #define FIRST_OPTION   1    // First valid menu choice
-#define LAST_OPTION    6    // Last valid menu choice
+#define LAST_OPTION    7    // Last valid menu choice
 
 namespace driver {
 
@@ -46,6 +46,13 @@ namespace driver {
      * @param c     A reference to a CardChallenge object.
      */
     void changeNickname(CardChallenge& c);
+
+    /** changeHighscoreFile
+     * Lets the user set a new highscore file.
+     *
+     * @param c     A reference to a CardChallenge object.
+     */
+    void changeHighscoreFile(CardChallenge& c);
 
     /** menu
      * Prints the user menu.

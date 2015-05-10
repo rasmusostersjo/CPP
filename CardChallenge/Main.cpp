@@ -23,7 +23,8 @@ int main(int argc, char *argv[])
             case 3: driver::viewCurrentSettings(cardChallenge); break;
             case 4: driver::changeLevel(cardChallenge);         break;
             case 5: driver::changeNickname(cardChallenge);      break;
-            case 6: driver::exitCardChallenge();
+            case 6: driver::changeHighscoreFile(cardChallenge); break;
+            case 7: driver::exitCardChallenge();
             default: continue;                                  break;
         }
         driver::menu();
@@ -31,5 +32,3 @@ int main(int argc, char *argv[])
 
     return 0;
 }
-
-

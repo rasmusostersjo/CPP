@@ -2,7 +2,7 @@
 #include "LanguageSettings.h"
 #include "Exception.h"      // write_error, read_error
 #include <stdexcept>        // invalid_argument
-#include <algorithm>        // for_each
+#include <algorithm>        // for_each, fill
 #include <iomanip>          // setw, left
 #include <iostream>         // cout, endl
 #include <fstream>          // read/write file
@@ -133,18 +133,26 @@ Scoreboard& Scoreboard::load(void)
 }
 
 
-Scoreboard& Scoreboard::rename(const std::string& newHighscoreFile)
+Scoreboard& Scoreboard::rename(const std::string& nhsf)
 {
-    std::string oldHighscoreFile = highscoreFile;
+    Scoreboard backup = *this;
     try {
-        highscoreFile = newHighscoreFile;
+        highscoreFile = nhsf;
         load();
     }
+
+    // The new highscore file could not be loaded, try to create it
     catch (read_error) {
-        highscoreFile = oldHighscoreFile;
-        throw std::invalid_argument("Scoreboard::rename");
+        std::ofstream newFile(nhsf, std::ios::out | std::ios::trunc);
+        if (!newFile.is_open()) {
+            *this = backup;
+            throw std::invalid_argument("Scoreboard::rename");
+        }
+
+        // Created file successfully, reset the highscore vector
+        std::fill(highscore.begin(), highscore.end(), Score());
     }
-    
+
     return *this;
 }
 

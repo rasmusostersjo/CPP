@@ -50,8 +50,9 @@ public:
      *             view the correct solution.
      *
      * @return          A constant reference to this object.
+     * @write_error     Generated if the highscore file could not be written to.
      */
-    CardChallenge& play(void) noexcept;
+    CardChallenge& play(void);
 
     /** viewScoreboard
      * Prints all highscores.

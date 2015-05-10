@@ -42,21 +42,13 @@ CardChallenge::CardChallenge(size_t lv, const std::string& n,
     try {
         setNick(n);         // Attempt to set nickname
     }
-
-    // Generated if the users nickname would overflow the nickname field
-    catch (std::range_error) {
-        std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
-        nick = DEFAULT_NICK;
-    }
-
-    // Generated if the users nickname contained invalid characters
     catch (std::invalid_argument) {
-        std::cerr << S_INVALID_NICKNAME_CHARS << std::endl << std::endl;
+        std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
         nick = DEFAULT_NICK;
     }
 }
 
-CardChallenge& CardChallenge::play(void) noexcept
+CardChallenge& CardChallenge::play(void)
 {
     std::cout << S_START;
     deck.shuffle();
@@ -163,10 +155,7 @@ CardChallenge& CardChallenge::setLevel(size_t lv)
 
 CardChallenge& CardChallenge::setNick(const std::string& n)
 {
-    if (n.size() > NICK_WIDTH - 1)
-        throw std::range_error("CardChallenge::setNick");
-
-    if (helper::validNick(n))
+    if (!n.size() || n.size() > NICK_WIDTH - 1 || !helper::validNick(n))
         throw std::invalid_argument("CardChallenge::setNick");
 
     nick = n;

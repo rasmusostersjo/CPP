@@ -1,4 +1,5 @@
 #include "Driver.h"
+#include "Exception.h"
 #include "LanguageSettings.h"
 #include <iostream>             // cout, endl, cout, cerr
 #include <string>               // string, getline
@@ -8,9 +9,14 @@
 
 void driver::play(CardChallenge& c)
 {
-    if (c.play().newHighscore())
-        std::cout << std::endl << S_NEW_HIGHSCORE << std::endl;
-    c.printLatestScore();
+    try {
+        if (c.play().newHighscore())
+            std::cout << std::endl << S_NEW_HIGHSCORE << std::endl;
+        c.printLatestScore();
+    }
+    catch (write_error) {
+        std::cout << S_SAVE_ERROR << std::endl;
+    }
 }
 
 void driver::viewScoreboard(CardChallenge& c)
@@ -22,8 +28,8 @@ void driver::viewScoreboard(CardChallenge& c)
 
 void driver::viewCurrentSettings(const CardChallenge& c)
 {
-    std::cout << "Nickname: " << c.getNick()
-              << "Level: "    << c.getLevel() << std::endl << std::endl;
+    std::cout << "Nickname: " << c.getNick()  << std::endl
+              << "Level:    " << c.getLevel() << std::endl << std::endl;
 }
 
 void driver::changeLevel(CardChallenge& c)
@@ -55,11 +61,24 @@ void driver::changeNickname(CardChallenge& c)
     try {
         c.setNick(nick);
     }
-    catch (std::range_error) {
+    catch (std::invalid_argument) {
         std::cerr << S_INVALID_NICKNAME << std::endl << std::endl;
     }
+}
+
+void driver::changeHighscoreFile(CardChallenge& c)
+{
+    std::string hsf;
+
+    std::cout << S_ENTER_HSF;
+    std::getline(std::cin, hsf);
+
+    try {
+        c.setHighscoreFile(hsf);
+        std::cout << S_VALID_HSF << std::endl << std::endl;
+    }
     catch (std::invalid_argument) {
-        std::cerr << S_INVALID_NICKNAME_CHARS << std::endl << std::endl;
+        std::cout << S_INVALID_HSF << std::endl << std::endl;
     }
 }
 
@@ -72,6 +91,7 @@ void driver::menu(void)
               << S_OPTION_4 << std::endl
               << S_OPTION_5 << std::endl
               << S_OPTION_6 << std::endl
+              << S_OPTION_7 << std::endl
               << S_STARS    << std::endl;
 }
 

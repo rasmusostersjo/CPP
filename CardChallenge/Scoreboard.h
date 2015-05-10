@@ -153,11 +153,12 @@ public:
     Scoreboard& load(void);
 
     /** rename
-     * Associates the scoreboard with a new highscore file and its content.
+     * Associates the scoreboard with a new highscore file. If an error occurs
+     * no changes will apply to the scoreboard.
      *
      * @return              A reference to this object.
-     * @invalid_argument    Generated if the highscore file could not be opened;
-     *                      then the old highscore file is not changed.
+     * @invalid_argument    Generated if the new highscore file could not be
+     *                      be opened nor created.
      */
     Scoreboard& rename(const std::string& newHighscoreFile);
 
