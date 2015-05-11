@@ -59,8 +59,7 @@ CardChallenge& CardChallenge::play(void)
     std::chrono::time_point<std::chrono::system_clock> t1, t2;
     t1 = std::chrono::system_clock::now();
     view();
-    t2 = std::chrono::system_clock::now();
-    std::chrono::duration<double> t = t2 - t1;
+    std::chrono::duration<double> t = std::chrono::system_clock::now() - t1;
 
     // Let user restate all cards
     for (size_t i = 0; i < deck.size(); ++i)
