@@ -188,14 +188,6 @@ private:
      * @range_error     Generated if the index i was out of range.
      */
     const CardChallenge& view(size_t i) const;
-
-    /** computeScore
-     * Computes the users score by comparing the card challenge deck (deck) and
-     * the score deck (scoreDeck) one card at a time.
-     * 
-     * @return          The user score.
-    size_t computeScore(void) const noexcept;
-     */
 };
 
 #endif // CARD_CHALLENGE
