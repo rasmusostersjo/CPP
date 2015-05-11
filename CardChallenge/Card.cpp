@@ -30,7 +30,6 @@ Card::Card(const Color& c, const Value& v)
 
 const Card& Card::view(void) const noexcept
 {
-
 #ifdef USE_ENGLISH
 
     // Print value, then color (if any)
@@ -47,7 +46,6 @@ const Card& Card::view(void) const noexcept
     std::cout << valueTable[value] << std::endl;
 
 #endif
-
     return *this;
 }
 
@@ -73,7 +71,7 @@ Card& Card::setValue(const Value& v) noexcept
     return *this;
 }
 
-bool Card::operator==(const Card& c)
+bool Card::operator==(const Card& c) const noexcept
 {
     return color == c.color && value == c.value;
 }

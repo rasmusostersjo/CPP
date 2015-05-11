@@ -6,6 +6,7 @@
 #include <vector>           // vector
 #include <cstddef>          // size_t
 #include <ostream>          // ostream
+#include <string>           // string
 #include <chrono>           // to store used time
 #include "Constants.h"
 
@@ -47,14 +48,6 @@ public:
      */
     bool operator>(const Score& s) const noexcept;
 
-    /** update
-     * Updates the this score according to the parameter s.
-     *
-     * @param s             The new score to assign to this score.
-     * @return              A reference to this object.
-     */
-    Score& update(const Score& s) noexcept;
-
     /** getLevel
      *
      * @return              The level of the this score.
@@ -78,6 +71,14 @@ public:
      * @return              The nickname associated with this score.
      */
     const std::string& getNick(void) const noexcept;
+
+    /** isEmpty
+     * An empty score is defined as a score with level, score and time all set
+     * to zero.
+     *
+     * @return              If this score is empty, true; else false.
+     */
+    bool isEmpty(void) const noexcept;
 
     /** Overload the << operator
      * Prints nickname, score, level and time on a single line formatted using
@@ -168,6 +169,12 @@ public:
      * @return          Constant reference to this object.
      */
     const Scoreboard& print(void) const noexcept;
+
+    /** getHighscoreFile
+     *
+     * @return          A constant reference to the highscore file.
+     */
+    const std::string& getHighscoreFile(void) const noexcept;
 
 private:
 

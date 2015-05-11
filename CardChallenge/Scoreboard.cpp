@@ -26,16 +26,6 @@ bool Score::operator>(const Score& s) const noexcept
     return score == s.score? time < s.time : score > s.score;
 }
 
-Score& Score::update(const Score& newScore) noexcept
-{
-    level = newScore.level;
-    score = newScore.score;
-    time  = newScore.time;
-    nick  = newScore.nick;
-
-    return *this;
-}
-
 size_t Score::getLevel(void) const noexcept
 {
     return level;
@@ -54,6 +44,11 @@ const std::chrono::duration<double>& Score::getTime(void) const noexcept
 const std::string& Score::getNick(void) const noexcept
 {
     return nick;
+}
+
+bool Score::isEmpty(void) const noexcept
+{
+    return !level && !score && !time.count();
 }
 
 std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept
@@ -174,4 +169,9 @@ const Scoreboard& Scoreboard::print(void) const noexcept
     } );
 
     return *this;
+}
+
+const std::string& Scoreboard::getHighscoreFile(void) const noexcept
+{
+    return highscoreFile;
 }

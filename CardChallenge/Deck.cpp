@@ -1,20 +1,32 @@
 #include "Deck.h"
-#include <algorithm>    // for_each, shuffle
+#include <algorithm>    // for_each, shuffle, fill
 #include <stdexcept>    // range_error
+
+// Functor to initialize a deck of cards in cycles
+class DeckInit {
+public:
+
+    DeckInit(void)
+        : color(HEARTS), value(ACE)
+    {
+    }
+
+    void operator()(Card& card)
+    {
+        card = Card(color, value);
+        if ( (value = Value((value + 1) % (VALUE - 1))) == 0 )
+            color = Color( (color + 1) % COLOR );
+    }
+
+private:
+    Color color;
+    Value value;
+};
 
 Deck::Deck(size_t n)
     : deck(n)
 {
-    Value v = ACE;
-    Color c = HEARTS;
-
-    std::for_each(deck.begin(), deck.end(), [&v, &c](Card& k) {
-        k.setColor(c).setValue(v);
-
-        // Increment value and color in cycles; dont assign jokers
-        if ( (v = Value((v + 1) % (VALUE - 1))) == 0 )
-            c = Color( (c + 1) % COLOR );
-    } );
+    std::for_each(deck.begin(), deck.end(), DeckInit());
 }
 
 Deck::Deck(const Color& c, const Value& v, size_t n)
@@ -44,7 +56,31 @@ const Deck& Deck::print(size_t index) const
     return *this;
 }
 
-Card& Deck::getCard(size_t index)
+Deck& Deck::removeCard(size_t index)
+{
+    if (index >= deck.size())
+        throw std::range_error("Error: Deck::removeCard");
+
+    deck.erase(deck.begin() + index);
+    return *this;
+}
+
+Deck& Deck::insertCard(size_t index, const Card& c)
+{
+    if (index > deck.size())
+        throw std::range_error("Error: Deck::insertCard");
+
+    deck.insert(deck.begin() + index, c);
+    return *this;
+}
+
+Deck& Deck::clear(void) noexcept
+{
+    deck.clear();
+    return *this;
+}
+
+const Card& Deck::getCard(size_t index) const
 {
     if (index >= deck.size())
         throw std::range_error("Error: Deck::getCard");

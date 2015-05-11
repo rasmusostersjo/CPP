@@ -83,7 +83,7 @@ public:
      *
      * @return          If this card was equal to c, true; else false.
      */
-    bool operator==(const Card& c);
+    bool operator==(const Card& c) const noexcept;
     
 private:
     

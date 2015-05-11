@@ -6,7 +6,6 @@
 #include "Constants.h"
 #include "Scoreboard.h"
 #include <cstddef>       // size_t
-#include <chrono>        // to measure time
 #include <string.h>      // string
 
 class CardChallenge
@@ -16,16 +15,13 @@ public:
 // Life cycle
 
     /** (Default) constructor
-     * Initializes a new cardChallenge object with an optional level, nickname
-     * and scoreboard.
+     * Initializes a new cardChallenge object with an optional level and
+     * nickname.
      *
      * @param lv        The level of this cardChallenge.
-     * @param nick      The user nickname.
-     * @param sb        A scoreboard associated with a highscore file.
+     * @param n         The user nickname.
      */
-    CardChallenge(size_t lv = DEFAULT_LV,
-        const std::string& nick = DEFAULT_NICK,
-        const Scoreboard& sb = Scoreboard(DEFAULT_SCORE_FILE, DEFAULT_HS_SIZE));
+    CardChallenge(size_t lv = DEFAULT_LV,const std::string& n = DEFAULT_NICK);
 
     /** Use the compiler defaults
      */
@@ -124,6 +120,12 @@ public:
      */
     const std::string& getNick(void) const noexcept;
 
+    /** getHighscoreFile
+     *
+     * @return          The name of the highscore file.
+     */
+    const std::string getHighscoreFile(void) const noexcept;
+
     /** getScore
      *
      * @return          The current score.
@@ -187,26 +189,13 @@ private:
      */
     const CardChallenge& view(size_t i) const;
 
-    /** stateCard
-     * Lets the user restate card_i and updates the score deck (scoreDeck)
-     * accordingly.
-     *
-     * Note that cards may be restated in various ways, depending on the current
-     * language settings.
-     *
-     * @param i         The index of the next card to restate.
-     * @return          A reference to this object.
-     * @range_error     Generated if i is was out of range.
-     */
-    CardChallenge& stateCard(size_t i);
-
     /** computeScore
      * Computes the users score by comparing the card challenge deck (deck) and
      * the score deck (scoreDeck) one card at a time.
      * 
      * @return          The user score.
+    size_t computeScore(void) const noexcept;
      */
-    size_t computeScore(void) noexcept;
 };
 
 #endif // CARD_CHALLENGE

@@ -15,8 +15,8 @@
  *
  * Optional:
  * =========
- *  -- CardChallenge.cpp
- *      * Add new else-if @CardChallenge::stateCard()
+ *  -- Helper.cpp
+ *      * Add new else-if @helper::stateCard()
  *
  *  -- Card.cpp
  *      * Add new else-if @Card::view()
@@ -207,6 +207,7 @@
 #define S_YOUR_TIME                "\tYour time:   "
 #define S_TIME_UNIT                "s"
 #define S_INVALID_NICKNAME         "Error: Invalid nickname."
+#define S_INVALID_SIZE_T           "Error: Invalid input."
 #define S_NO_SCORE                 "There is no score associated with the " \
     "current settings."
 #define S_INVALID_HS_FILE          "Error: Invalid highscore file - no " \
@@ -233,6 +234,7 @@
 #define S_TIME_UNIT                "s"
 #define S_READ_ERROR_WRITE_SUCCESS "Skapade highscore-filen!"
 #define S_INVALID_NICKNAME         "Error: Ogiltigt användarnamn."
+#define S_INVALID_SIZE_T           "Error: Ogiltigt indata."
 #define S_NO_SCORE                 "Det finns inte något resultat " \
     "associerat med nuvarande inställningar."
 #define S_INVALID_HS_FILE          "Error: Ogiltig highscore-fil - inga " \
@@ -248,13 +250,13 @@
 
 #ifdef USE_ENGLISH
 
-#define PLAYER      "nickname:"
+#define PLAYER      "Nickname:"
 #define _PLAYER_    "---------"
-#define SCORE       "score:"
+#define SCORE       "Score:"
 #define _SCORE_     "------"
-#define LEVEL       "level:"
+#define LEVEL       "Level:"
 #define _LEVEL_     "------"
-#define TIME        "time(s):"
+#define TIME        "Time(s):"
 #define _TIME_      "--------"
 
 #else /* USE_SWEDISH */

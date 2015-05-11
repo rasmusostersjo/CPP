@@ -64,6 +64,31 @@ public:
      */
     const Deck& print(size_t i) const;
 
+    /** removeCard
+     * Removes a card from the deck by index.
+     *
+     * @param i         The index of the card to remove.
+     * @return          A reference to this object.
+     * @range_error     Generated if i is larger or equal to the deck size. 
+     */
+    Deck& removeCard(size_t i);
+
+    /** insertCard
+     * Inserts a card to the deck by index.
+     *
+     * @param i         The index of the card to insert.
+     * @return          A reference to this object.
+     * @range_error     Generated if i is larger than the deck size.
+     */
+    Deck& insertCard(size_t i, const Card& c);
+
+    /** clear
+     * Removes all cards from the deck.
+     *
+     * @return          A reference to this object.
+     */
+    Deck& clear(void) noexcept;
+
     /** getCard
      * Similarly to the Deck::print() function, the getCard() function indexes
      * in [0, n).
@@ -75,7 +100,7 @@ public:
      * @return          A reference to the card indexed by i.
      * @range_error     Generated if i is larger or equal to the deck size.
      */
-    Card& getCard(size_t i);
+    const Card& getCard(size_t i) const;
 
     /** shuffle
      * Shuffles the entire deck by using the STL-algorithm std::shuffle.

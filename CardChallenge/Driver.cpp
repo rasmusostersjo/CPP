@@ -1,6 +1,7 @@
 #include "Driver.h"
 #include "Exception.h"
 #include "LanguageSettings.h"
+#include "Helper.h"
 #include <iostream>             // cout, endl, cout, cerr
 #include <string>               // string, getline
 #include <stdexcept>            // range_error
@@ -15,7 +16,7 @@ void driver::play(CardChallenge& c)
         c.printLatestScore();
     }
     catch (write_error) {
-        std::cout << S_SAVE_ERROR << std::endl;
+        std::cout << S_SAVE_ERROR << std::endl << std::endl;
     }
 }
 
@@ -28,8 +29,10 @@ void driver::viewScoreboard(CardChallenge& c)
 
 void driver::viewCurrentSettings(const CardChallenge& c)
 {
-    std::cout << "Nickname: " << c.getNick()  << std::endl
-              << "Level:    " << c.getLevel() << std::endl << std::endl;
+    std::cout << "Nickname:       " << c.getNick()          << std::endl
+              << "Level:          " << c.getLevel()         << std::endl
+              << "Highscore file: " << c.getHighscoreFile() << std::endl
+              << std::endl;
 }
 
 void driver::changeLevel(CardChallenge& c)
@@ -37,16 +40,15 @@ void driver::changeLevel(CardChallenge& c)
     std::string level;
 
     std::cout << S_ENTER_LEVEL;
-    std::cin  >> level;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
     try {
-        c.setLevel(std::atoi(level.c_str()));
+        c.setLevel(helper::getSize_t());
         std::cout << S_LEVEL_SET_SUCCESS << std::endl << std::endl;
     }
     catch (std::range_error) {
         std::cerr << S_LEVEL_SET_FAIL << std::endl << std::endl;
+    }
+    catch (std::invalid_argument) {
+        std::cerr << S_INVALID_SIZE_T << std::endl << std::endl;
     }
 }
 
