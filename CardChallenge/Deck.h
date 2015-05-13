@@ -33,19 +33,13 @@ public:
      */
     Deck(const Color& c, const Value& v, size_t n = DEFAULT_DECK_SIZE);
 
-    /** Assignment operator
-     *
-     * @param d         A deck to copy to this deck.
-     * @return          A reference to this object.
-     */
-    Deck& operator=(const Deck& d);
-
     /** Use the compiler defaults
      */
-    Deck(const Deck&)       = default;
-    Deck(Deck&&)            = default;
-    ~Deck(void)             = default;
-    Deck& operator=(Deck&&) = default;
+    Deck(const Deck&)              = default;
+    Deck(Deck&&)                   = default;
+    ~Deck(void)                    = default;
+    Deck& operator=(const Deck& d) = default;
+    Deck& operator=(Deck&&)        = default;
 
     /** print
      * Prints the entire deck.
@@ -55,8 +49,9 @@ public:
     const Deck& print(void) const noexcept;
 
     /** print
-     * Prints the card at index i (deck). Note that the print() function indexes
-     * in [0, n), where n is the deck size.
+     * Prints the card at deck-index i.
+     *
+     * Note that the print() function indexes in [0, n).
      *
      * @param i         The deck-index of the card to print.
      * @return          A constant reference to this object.
@@ -67,6 +62,9 @@ public:
     /** removeCard
      * Removes a card from the deck by index.
      *
+     * Similar to the print() function, the removeCard() function indexes in
+     * [0, n).
+     *
      * @param i         The index of the card to remove.
      * @return          A reference to this object.
      * @range_error     Generated if i is larger or equal to the deck size. 
@@ -76,7 +74,11 @@ public:
     /** insertCard
      * Inserts a card to the deck by index.
      *
-     * @param i         The index of the card to insert.
+     * Unlike the print() and removeCard() functions, the insertCard() function
+     * can be indexed in [0, n]. Here, an insertion at index n corresponds to
+     * inserting a card at the end of the deck.
+     * 
+     * @param i         The index of the position to insert the card.
      * @return          A reference to this object.
      * @range_error     Generated if i is larger than the deck size.
      */
@@ -90,20 +92,17 @@ public:
     Deck& clear(void) noexcept;
 
     /** getCard
-     * Similarly to the Deck::print() function, the getCard() function indexes
+     * Similar to the Deck::print() function, the getCard() function indexes
      * in [0, n).
      *
-     * Note that getCard() function allows the cards value and/or color to be
-     * modified by calling Card::setColor() and/or Card::setValue().
-     *
-     * @param i         The deck-index of the card to grab.
-     * @return          A reference to the card indexed by i.
+     * @param i         The deck-index of a card to grab.
+     * @return          The card indexed by i.
      * @range_error     Generated if i is larger or equal to the deck size.
      */
     const Card& getCard(size_t i) const;
 
     /** shuffle
-     * Shuffles the entire deck by using the STL-algorithm std::shuffle.
+     * Shuffles the entire deck.
      *
      * @return          A reference to this object.
      */

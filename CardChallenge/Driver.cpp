@@ -8,6 +8,8 @@
 #include <cstdlib>              // atoi
 #include <climits>              // numeric_limits
 
+///////////////////////////// Driver ///////////////////////////////////////////
+
 void driver::play(CardChallenge& c)
 {
     try {
@@ -37,8 +39,6 @@ void driver::viewCurrentSettings(const CardChallenge& c)
 
 void driver::changeLevel(CardChallenge& c)
 {
-    std::string level;
-
     std::cout << S_ENTER_LEVEL;
     try {
         c.setLevel(helper::getSize_t());
@@ -103,9 +103,7 @@ int driver::getChoice(void)
 
     // Let user choose a menu option
     std::cout << S_ENTER_CHOICE;
-    std::cin  >> c;
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, c);
 
     int choice = *c.c_str() - '0';
     if (choice < FIRST_OPTION || choice > LAST_OPTION) {

@@ -23,6 +23,8 @@ private:
     Value value;
 };
 
+///////////////////////////// Deck /////////////////////////////////////////////
+
 Deck::Deck(size_t n)
     : deck(n)
 {
@@ -33,12 +35,6 @@ Deck::Deck(const Color& c, const Value& v, size_t n)
     : deck(n)
 {
     std::fill(deck.begin(), deck.end(), Card(c, v));
-}
-
-Deck& Deck::operator=(const Deck& d)
-{
-    deck.assign(d.deck.begin(), d.deck.end());
-    return *this;
 }
 
 const Deck& Deck::print(void) const noexcept

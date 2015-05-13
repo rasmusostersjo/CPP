@@ -6,16 +6,12 @@ Currently the Card Challenge supports both English and Swedish, which is set
 at compile time. If one whiches to add another language, see instructions in the
 LanguageSettings header.
 
-<br/>
-
-To compile, type 'make'.<br/>
+To compile, type 'make'. <br/>
 In order to start the card challenge, type 'make play' or './Main'.
 
 Restating cards (English):
 ==========================
 Cards are restated as 'value' 'color' (using the hotkeys below).
-
-<br/>
 
 Ace: 'a' <br/>
 Two: '2'<br/>
@@ -32,21 +28,16 @@ Queen: 'q'<br/>
 King: 'k'<br/>
 Joker: 'j'<br/>
 
-<br/>
-
 Hearts: 'h'<br/>
 Clubs: 'c'<br/>
 Spades: 's'<br/>
 Diamonds: 'd'<br/>
 
-<br/>
 As an example, Jack of Hearts would be restated as "j h".
 
 Restating cards (Swedish):
 ==========================
 Cards are restated as 'color' 'value' (using the hotkeys below).
-
-<br/>
 
 Ace: 'e'<br/>
 Two: '2'<br/>
@@ -68,7 +59,6 @@ Clubs: 'r'<br/>
 Spades: 's'<br/>
 Diamonds: 'k'<br/>
 
-<br/>
 As an example, Ace of Spaces would be restated as "s e".
 
 <br/>

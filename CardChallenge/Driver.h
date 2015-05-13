@@ -27,7 +27,8 @@ namespace driver {
     void viewScoreboard(CardChallenge& c);
 
     /** viewCurrentSettings
-     * Prints the user nickname and current level.
+     * Prints the users nickname, level-setting and the current highscore file
+     * beeing associated with the CardChallenge object.
      *
      * @param c     A constant reference to a CardChallenge object.
      */

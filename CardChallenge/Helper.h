@@ -51,6 +51,15 @@ namespace helper {
      */
     Value transformValue(const std::string& c);
 
+    /** getSize_t
+     * Lets the user enter a positive integer.
+     *
+     * @return              A positive integer entered by the user.
+     * @invalid_argument    Generated if the users input caused overflow
+     *                      or contained invalid characters.
+     */
+    size_t getSize_t(void);
+
     /** validNick
      * Tests if n is a valid, non-empty, nickname consisting of [a-zA-Z0-9_ ].
      * Here nonempty include nicknames with only blank spaces.
@@ -80,15 +89,6 @@ namespace helper {
      */
     Score computeScore(const Deck& pd, const Deck& sd, 
         const std::chrono::duration<double>& t, const std::string& nick);
-
-    /** getSize_t
-     * Lets the user enter a positive integer.
-     *
-     * @return              A positive integer entered by the user.
-     * @invalid_argument    Generated if the users input caused overflow
-     *                      or contained invalid characters.
-     */
-    size_t getSize_t(void);
 
 } // helper
 

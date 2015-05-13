@@ -232,7 +232,7 @@
 #define S_LEVEL_SCORE_SEP          "/"
 #define S_YOUR_TIME                "\tAnvänd tid:    "
 #define S_TIME_UNIT                "s"
-#define S_READ_ERROR_WRITE_SUCCESS "Skapade highscore-filen!"
+#define S_READ_ERROR_WRITE_SUCCESS "Skapade den angivna highscore-filen!"
 #define S_INVALID_NICKNAME         "Error: Ogiltigt användarnamn."
 #define S_INVALID_SIZE_T           "Error: Ogiltigt indata."
 #define S_NO_SCORE                 "Det finns inte något resultat " \

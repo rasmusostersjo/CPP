@@ -23,7 +23,7 @@ typedef enum {
 
 class Card {
 public:
-    
+
     /** Default constructor
      * Initializes this card with no color and a joker.
      */
@@ -86,7 +86,7 @@ public:
     bool operator==(const Card& c) const noexcept;
     
 private:
-    
+
     Color color;
     Value value;
 };

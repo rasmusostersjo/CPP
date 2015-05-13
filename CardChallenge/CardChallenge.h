@@ -15,13 +15,13 @@ public:
 // Life cycle
 
     /** (Default) constructor
-     * Initializes a new cardChallenge object with an optional level and
+     * Initializes a new CardChallenge object with an optional level and
      * nickname.
      *
      * @param lv        The level of this cardChallenge.
      * @param n         The user nickname.
      */
-    CardChallenge(size_t lv = DEFAULT_LV,const std::string& n = DEFAULT_NICK);
+    CardChallenge(size_t lv = DEFAULT_LV, const std::string& n = DEFAULT_NICK);
 
     /** Use the compiler defaults
      */
@@ -58,9 +58,7 @@ public:
     const CardChallenge& viewScoreboard(void) const noexcept;
 
     /** printLatestScore
-     * Prints the latest score and lets the user reveal the entire solution.
-     * If there is no latest score, i.e. it is set to (0, 0, 0, ...), an error
-     * message is printed.
+     * Prints the latest score (if any; else an error message).
      *
      * @return          A constant reference to this object.
      */
@@ -74,8 +72,7 @@ public:
     bool newHighscore(void) const noexcept;
 
     /** shuffle
-     * Shuffles the deck by calling Deck::shuffle(). Note that the the shuffle()
-     * function does not provide any seeding.
+     * Shuffles the entire deck.
      *
      * @return          A reference to this object.
      */
@@ -95,8 +92,8 @@ public:
      *
      * @param nick          A new nickname to assign the player.
      * @return              A reference to this object.
-     * @invalid_argument    Generated if the new nickname would overflow the
-     *                      the nickname field (NICK_WIDTH - 1).
+     * @invalid_argument    Generated if the new nickname is empty, contains
+     *                      invalid characters or is to large.
      */
     CardChallenge& setNick(const std::string& n);
 

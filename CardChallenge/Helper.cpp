@@ -6,6 +6,8 @@
 #include <algorithm>            // find_if
 #include <climits>              // std::numeric_limits
 
+///////////////////////////// Helper ///////////////////////////////////////////
+
 void helper::readENTER(void)
 {
     while (std::cin.get() != '\n')
@@ -64,46 +66,6 @@ Value helper::transformValue(const std::string& v)
     return VALUE; // invalid
 }
 
-bool helper::validNick(const std::string& n, size_t max)
-{
-    auto Empty = [](int c) { return c != ' '; };
-    if (n.size() > max || std::find_if(n.begin(), n.end(), Empty) == n.end())
-        return false;
-
-    auto Inv = [](int c) { return !(std::isalnum(c) || c == ' ' || c == '_'); };
-    return std::find_if(n.begin(), n.end(), Inv) == n.end();
-}
-
-Card helper::stateCard(size_t index)
-{
-    std::string c, v;
-    std::cout << S_STATE_CARD << index << ": ";
-
-#ifdef USE_ENGLISH
-    std::cin >> v >> c;
-#else /* USE_SWEDISH */
-    std::cin >> c >> v;
-#endif
-
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<size_t>::max(), '\n');
-
-    return Card(helper::transformColor(c), helper::transformValue(v));
-}
-
-Score helper::computeScore(const Deck& pd, const Deck& sd,
-    const std::chrono::duration<double>& t, const std::string& nick)
-{
-    size_t s = 0;
-    size_t n = pd.size() < sd.size() ? pd.size() : sd.size();
-
-    for (size_t i = 0; i < n; ++i)
-        if (pd.getCard(i) == sd.getCard(i))
-            ++s;
-
-    return Score(pd.size(), s, t, nick);
-}
-
 size_t helper::getSize_t(void)
 {
     // Read user input
@@ -134,4 +96,45 @@ size_t helper::getSize_t(void)
         throw std::invalid_argument("helper::getSize_t");
 
     return ret;
+}
+
+bool helper::validNick(const std::string& n, size_t max)
+{
+    auto Empty = [](int c) { return c != ' '; };
+    if (n.size() > max || std::find_if(n.begin(), n.end(), Empty) == n.end())
+        return false;
+
+    auto Inv = [](int c) { return !(std::isalnum(c) || c == ' ' || c == '_'); };
+    return std::find_if(n.begin(), n.end(), Inv) == n.end();
+}
+
+Card helper::stateCard(size_t index)
+{
+    std::string c, v;
+    std::cout << S_STATE_CARD << index << ": ";
+
+#ifdef USE_ENGLISH
+    std::cin >> v >> c;
+#else /* USE_SWEDISH */
+    std::cin >> c >> v;
+#endif
+
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<size_t>::max(), '\n');
+
+    return Card(helper::transformColor(c), helper::transformValue(v));
+}
+
+// TODO: Maybe update the compute score process
+Score helper::computeScore(const Deck& pd, const Deck& sd,
+    const std::chrono::duration<double>& t, const std::string& nick)
+{
+    size_t s = 0;
+    size_t n = pd.size() < sd.size() ? pd.size() : sd.size();
+
+    for (size_t i = 0; i < n; ++i)
+        if (pd.getCard(i) == sd.getCard(i))
+            ++s;
+
+    return Score(pd.size(), s, t, nick);
 }
