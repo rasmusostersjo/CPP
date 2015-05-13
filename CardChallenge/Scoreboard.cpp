@@ -83,47 +83,71 @@ bool Scoreboard::update(const Score& sc) noexcept
     return false;
 }
 
+// Functor to write highscores to file
+class WriteHighscore {
+public:
+    
+    WriteHighscore(std::ofstream& wFile)
+        : writeFile(wFile)
+    {
+    }
+    
+    void operator()(const Score& s) const noexcept
+    {
+        writeFile << s.getNick()  << std::endl << s.getScore() << std::endl
+                  << s.getLevel() << std::endl << s.getTime().count()
+                  << std::endl;
+    }
+    
+private:
+    std::ofstream& writeFile;
+};
+
 const Scoreboard& Scoreboard::save(void) const
 {
     // Attempt to open highscore file for writing
-    std::ofstream writeFile(highscoreFile, std::ios::out | std::ios::trunc);
-    if (!writeFile.is_open())
+    std::ofstream wFile(highscoreFile, std::ios::out | std::ios::trunc);
+    if (!wFile.is_open())
         throw write_error("Scoreboard::save");
 
-    // Write all current highscores to the highscore file
-    std::for_each(highscore.begin(), highscore.end(), [&](const Score& s) {
-        writeFile << s.getNick()  << std::endl << s.getScore() << std::endl
-                  << s.getLevel() << std::endl << s.getTime().count() 
-                  << std::endl;
-    } );
-
+    std::for_each(highscore.begin(), highscore.end(), WriteHighscore(wFile));
     return *this;
 }
+
+// Functor to read highscores
+class ReadHighscore {
+public:
+    
+    ReadHighscore(std::ifstream& rFile)
+        : readFile(rFile)
+    {
+    }
+
+    void operator()(Score& score)
+    {
+        std::getline(readFile, n);
+        if (readFile >> std::ws >> s >> std::ws >> l >> std::ws >> t >> std::ws)
+            score = Score(l, s, std::chrono::duration<double>(t), n);
+        else
+            score = Score();
+    }
+
+private:
+    std::ifstream& readFile;
+    std::string n;
+    size_t l;
+    size_t s;
+    double t;
+};
 
 Scoreboard& Scoreboard::load(void)
 {
     // Attempt to open highscore file for reading
-    std::ifstream readFile(highscoreFile, std::ios::in);
-    if (!readFile.is_open())
+    std::ifstream rFile(highscoreFile, std::ios::in);
+    if (!rFile.is_open())
         throw read_error("Scoreboard::load");
 
-    // Read highscores (at most highscore.size() of them)
-    size_t lv, s, i;
-    double t;
-    std::string n;
-
-    for (i = 0; i < highscore.size(); ++i) {
-        readFile >> std::ws;
-        std::getline(readFile, n);
-        if (!(readFile >> std::ws >> s >> std::ws >> lv >> std::ws >> t))
-            break;
-        highscore[i] = Score(lv, s, std::chrono::duration<double>(t), n);
-    }
-
-    // Zero out remaining highscores if any
-    while (i < highscore.size())
-        highscore[i++] = Score();
-
+    std::for_each(highscore.begin(), highscore.end(), ReadHighscore(rFile));
     return *this;
 }
 
@@ -140,7 +164,7 @@ Scoreboard& Scoreboard::rename(const std::string& nhsf)
     catch (read_error) {
         std::ofstream newFile(nhsf, std::ios::out | std::ios::trunc);
         if (!newFile.is_open()) {
-            *this = backup;
+            *this = backup; // recover the old scoreboard
             throw std::invalid_argument("Scoreboard::rename");
         }
 
@@ -153,7 +177,7 @@ Scoreboard& Scoreboard::rename(const std::string& nhsf)
 
 const Scoreboard& Scoreboard::print(void) const noexcept
 {
-    // Print table frame and then all valid scores
+    // Print table frame
     std::cout << std::left << std::setw(TAB_WIDTH)   << ""
               << std::left << std::setw(NICK_WIDTH)  << PLAYER
               << std::left << std::setw(SCORE_WIDTH) << SCORE
@@ -164,6 +188,8 @@ const Scoreboard& Scoreboard::print(void) const noexcept
               << std::left << std::setw(SCORE_WIDTH) << _SCORE_
               << std::left << std::setw(LEVEL_WIDTH) << _LEVEL_
               << std::left << std::setw(TIME_WIDTH)  << _TIME_ << std::endl;
+
+    // Print all highscores
     std::for_each(highscore.begin(), highscore.end(), [](const Score& s) {
         std::cout << std::left << std::setw(TAB_WIDTH) << "" << s << std::endl;
     } );

@@ -40,13 +40,16 @@ public:
     Score& operator=(Score&&)      = default;
 
     /** Larger than operator
-     * Returns true if this score is higher than s by comparing:
-     *      a) score
-     *      b) time if scores were equal
+     * Compares this score with s by
+     *      a) the score field
+     *      b) the time field if scores were equal
      *
-     * @return              A bolean value; true or false.
+     * @param s             A score to compare to this score.
+     * @return              If this score was larger than s, true; else false.
      */
     bool operator>(const Score& s) const noexcept;
+
+    // TODO: Implemented == operator and include <utility> for all operators
 
     /** getLevel
      *
@@ -106,7 +109,7 @@ public:
      * Invokes the default constructor for each score, i.e. all scores will
      * initially be unset.
      *
-     * @param hsf       The name of a text file to use for storing highscores.
+     * @param hsf       The name of a text file to save highscores to.
      * @param hss       The size of the highscore list.
      */
     Scoreboard(const  std::string& hsf = DEFAULT_SCORE_FILE,
@@ -164,7 +167,7 @@ public:
     Scoreboard& rename(const std::string& newHighscoreFile);
 
     /** print
-     * Prints the entire score board.
+     * Prints the entire scoreboard.
      *
      * @return          Constant reference to this object.
      */
@@ -172,7 +175,7 @@ public:
 
     /** getHighscoreFile
      *
-     * @return          A constant reference to the highscore file.
+     * @return          The highscore file name.
      */
     const std::string& getHighscoreFile(void) const noexcept;
 
