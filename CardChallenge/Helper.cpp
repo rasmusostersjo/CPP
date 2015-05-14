@@ -125,13 +125,13 @@ Card helper::stateCard(size_t index)
     return Card(helper::transformColor(c), helper::transformValue(v));
 }
 
-// TODO: Maybe update the compute score process
 Score helper::computeScore(const Deck& pd, const Deck& sd,
     const std::chrono::duration<double>& t, const std::string& nick)
 {
     size_t s = 0;
     size_t n = pd.size() < sd.size() ? pd.size() : sd.size();
 
+    // Compute score
     for (size_t i = 0; i < n; ++i)
         if (pd.getCard(i) == sd.getCard(i))
             ++s;
