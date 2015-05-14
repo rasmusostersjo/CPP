@@ -21,11 +21,6 @@ Score::Score(size_t lv, size_t s, const std::chrono::duration<double>& t,
 {
 }
 
-bool Score::operator>(const Score& s) const noexcept
-{
-    return score == s.score? time < s.time : score > s.score;
-}
-
 size_t Score::getLevel(void) const noexcept
 {
     return level;
@@ -61,6 +56,35 @@ std::ostream& operator<<(std::ostream& os, const Score& obj) noexcept
     return os;
 }
 
+bool Score::operator>(const Score& s) const noexcept
+{
+    return score == s.score? time < s.time : score > s.score;
+}
+
+bool Score::operator<(const Score& s) const noexcept
+{
+    return score == s.score? time > s.time : score < s.score;
+}
+
+bool Score::operator==(const Score& s) const noexcept
+{
+    return !(*this > s) && !(*this < s);
+}
+
+bool Score::operator!=(const Score& s) const noexcept
+{
+    return !(*this == s);
+}
+
+bool Score::operator>=(const Score& s) const noexcept
+{
+    return *this > s || *this == s;
+}
+
+bool Score::operator<=(const Score& s) const noexcept
+{
+    return *this < s || *this == s;
+}
 
 ///////////////////////////// Scoreboard ///////////////////////////////////////
 

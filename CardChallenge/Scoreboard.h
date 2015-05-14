@@ -2,13 +2,13 @@
 #define SCORE_BOARD_H
 
 // Libraries
+#include "Constants.h"
 #include <string>           // string, getline
 #include <vector>           // vector
 #include <cstddef>          // size_t
 #include <ostream>          // ostream
 #include <string>           // string
 #include <chrono>           // to store used time
-#include "Constants.h"
 
 class Score {
 public:
@@ -38,18 +38,6 @@ public:
     ~Score(void)                   = default;
     Score& operator=(const Score&) = default;
     Score& operator=(Score&&)      = default;
-
-    /** Larger than operator
-     * Compares this score with s by
-     *      a) the score field
-     *      b) the time field if scores were equal
-     *
-     * @param s             A score to compare to this score.
-     * @return              If this score was larger than s, true; else false.
-     */
-    bool operator>(const Score& s) const noexcept;
-
-    // TODO: Implemented == operator and include <utility> for all operators
 
     /** getLevel
      *
@@ -93,6 +81,24 @@ public:
      * @param obj           A score object to print.
      */
     friend std::ostream& operator<<(std::ostream& o, const Score& obj) noexcept;
+
+    /** Relational operators
+     * Compares this score with s by
+     *      a) the score field
+     *      b) the time field if scores were equal
+     *
+     * Note that in (b), a score is considered to be greater if the time used
+     * was less than the other.
+     *
+     * @param s             A score to compare to this score.
+     * @return              If this score [RELATION] s, true; else false.
+     */
+    bool operator>(const Score& s)  const noexcept;
+    bool operator<(const Score& s)  const noexcept;
+    bool operator==(const Score& s) const noexcept;
+    bool operator!=(const Score& s) const noexcept;
+    bool operator>=(const Score& s) const noexcept;
+    bool operator<=(const Score& s) const noexcept;
 
 private:
 
