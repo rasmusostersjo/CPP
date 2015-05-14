@@ -6,13 +6,13 @@
 #include "Helper.h"
 #include "LanguageSettings.h"
 #include "CardChallenge.h"
-#include <cstdlib>          // srand, atoi
+#include <cstdlib>          // srand
 #include <ctime>            // time
-#include <iostream>         // cout, cin, cerr, ws,
+#include <iostream>         // cout, cin, cerr
 #include <string>           // string, getline
 #include <ctime>            // time
 
 // Constants
-#define GAME_LEVEL 3        // Start level
+#define GAME_LEVEL 13       // Start level
 
 #endif // MAIN_H
