@@ -7,6 +7,52 @@
 #include <iostream>         // cout, endl
 #include <fstream>          // read/write file
 
+// Functor to write highscores to file
+class WriteHighscore {
+public:
+    
+    WriteHighscore(std::ofstream& wFile)
+        : writeFile(wFile)
+    {
+    }
+    
+    void operator()(const Score& s) const noexcept
+    {
+        writeFile << s.getNick()  << std::endl << s.getScore() << std::endl
+                  << s.getLevel() << std::endl << s.getTime().count()
+                  << std::endl;
+    }
+    
+private:
+    std::ofstream& writeFile;
+};
+
+// Functor to read highscores
+class ReadHighscore {
+public:
+    
+    ReadHighscore(std::ifstream& rFile)
+        : readFile(rFile)
+    {
+    }
+
+    void operator()(Score& score)
+    {
+        std::getline(readFile, n);
+        if (readFile >> std::ws >> s >> std::ws >> l >> std::ws >> t >> std::ws)
+            score = Score(l, s, std::chrono::duration<double>(t), n);
+        else
+            score = Score();
+    }
+
+private:
+    std::ifstream& readFile;
+    std::string n;
+    size_t l;
+    size_t s;
+    double t;
+};
+
 ///////////////////////////// Score ////////////////////////////////////////////
 
 Score::Score(void)
@@ -107,26 +153,6 @@ bool Scoreboard::update(const Score& sc) noexcept
     return false;
 }
 
-// Functor to write highscores to file
-class WriteHighscore {
-public:
-    
-    WriteHighscore(std::ofstream& wFile)
-        : writeFile(wFile)
-    {
-    }
-    
-    void operator()(const Score& s) const noexcept
-    {
-        writeFile << s.getNick()  << std::endl << s.getScore() << std::endl
-                  << s.getLevel() << std::endl << s.getTime().count()
-                  << std::endl;
-    }
-    
-private:
-    std::ofstream& writeFile;
-};
-
 const Scoreboard& Scoreboard::save(void) const
 {
     // Attempt to open highscore file for writing
@@ -137,32 +163,6 @@ const Scoreboard& Scoreboard::save(void) const
     std::for_each(highscore.begin(), highscore.end(), WriteHighscore(wFile));
     return *this;
 }
-
-// Functor to read highscores
-class ReadHighscore {
-public:
-    
-    ReadHighscore(std::ifstream& rFile)
-        : readFile(rFile)
-    {
-    }
-
-    void operator()(Score& score)
-    {
-        std::getline(readFile, n);
-        if (readFile >> std::ws >> s >> std::ws >> l >> std::ws >> t >> std::ws)
-            score = Score(l, s, std::chrono::duration<double>(t), n);
-        else
-            score = Score();
-    }
-
-private:
-    std::ifstream& readFile;
-    std::string n;
-    size_t l;
-    size_t s;
-    double t;
-};
 
 Scoreboard& Scoreboard::load(void)
 {
