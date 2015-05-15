@@ -16,6 +16,8 @@ public:
     /** Default constructor
      * Initializes this score to default values (DEFAULT_SCORE, DEFAULT_NICK)
      * to signal that no score was set yet.
+     *
+     * @bad_alloc           Generated if heap memory could not be allocated.
      */
     Score(void);
     
@@ -27,6 +29,7 @@ public:
      * @param s             The user's score.
      * @param t             The time used viewing the entire deck.
      * @param nick          The highscore holder's nickname.
+     * @bad_alloc           Generated if heap memory could not be allocated.
      */
     Score(size_t lv, size_t s, const std::chrono::duration<double>& t,
         const std::string& n);
@@ -117,6 +120,7 @@ public:
      *
      * @param hsf       The name of a text file to save highscores to.
      * @param hss       The size of the highscore list.
+     * @bad_alloc       Generated if heap memory could not be allocated.
      */
     Scoreboard(const  std::string& hsf = DEFAULT_SCORE_FILE,
                size_t hss              = DEFAULT_HS_SIZE);
