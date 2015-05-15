@@ -272,4 +272,19 @@
 
 #endif // USE_ENGLISH
 
+///////////////////////////// Main /////////////////////////////////////////////
+
+#ifdef USE_ENGLISH
+
+#define S_BAD_ALLOC    "Error: Some memory allocation failed. Program closes."
+#define S_UNKOWN_ERROR "Error: An unkown error occured. Program closes."
+
+#else /* USE_SWEDISH */
+
+#define S_BAD_ALLOC    "Error: Någon minnesallokering misslyckades. " \
+    "Programmet avslutas."
+#define S_UNKOWN_ERROR "Error: Ett oväntat fel inträffade. Programmet avslutas."
+
+#endif // USE_ENGLISH
+
 #endif // LANGUAGE_SETTINGS
