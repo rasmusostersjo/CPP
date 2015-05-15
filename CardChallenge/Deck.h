@@ -21,6 +21,8 @@ public:
      * n = 53 the deck contains each card once and Ace of Hearts twice.
      *
      * @param n         The amount of cards to assign to this deck.
+     * @bad_alloc       Generated if heap memory for this deck could not be
+     *                  allocated.
      */
     Deck(size_t n = DEFAULT_DECK_SIZE);
 
@@ -30,6 +32,8 @@ public:
      * @param c         The color to assign to all cards.
      * @param v         The value to assign to all cards.
      * @param n         The amount of cards to assign to this deck.
+     * @bad_alloc       Generated if heap memory for this deck could not be
+     *                  allocated.
      */
     Deck(const Color& c, const Value& v, size_t n = DEFAULT_DECK_SIZE);
 
