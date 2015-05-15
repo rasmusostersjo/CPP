@@ -11,6 +11,7 @@
 #include <iostream>         // cout, cin, cerr
 #include <string>           // string, getline
 #include <ctime>            // time
+#include <new>              // bad_alloc
 
 // Constants
 #define GAME_LEVEL 13       // Start level
