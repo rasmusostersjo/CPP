@@ -9,8 +9,7 @@ LanguageSettings header.
 To compile, type 'make'. <br/>
 In order to start the card challenge, type 'make play' or './Main'.
 
-Restating cards (English):
-==========================
+##Restating cards (English):
 Cards are restated as 'value' 'color' (using the hotkeys below).
 
 Ace: 'a' <br/>
@@ -35,8 +34,7 @@ Diamonds: 'd'<br/>
 
 As an example, Jack of Hearts would be restated as "j h".
 
-Restating cards (Swedish):
-==========================
+##Restating cards (Swedish):
 Cards are restated as 'color' 'value' (using the hotkeys below).
 
 Ace: 'e'<br/>
