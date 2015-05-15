@@ -20,6 +20,7 @@ public:
      *
      * @param lv        The level of this cardChallenge.
      * @param n         The user nickname.
+     * @bad_alloc       Generated if heap memory could not be allocated.
      */
     CardChallenge(size_t lv = DEFAULT_LV, const std::string& n = DEFAULT_NICK);
 
