@@ -120,8 +120,9 @@ Card helper::stateCard(size_t index)
     std::cin >> c >> v;
 #endif
 
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<size_t>::max(), '\n');
+    // Ignore any characters until a new line is read
+    while (std::cin.get() != '\n')
+        ;
 
     return Card(helper::transformColor(c), helper::transformValue(v));
 }
