@@ -5,6 +5,7 @@
 #include <cctype>               // isalnum
 #include <algorithm>            // find_if
 #include <climits>              // std::numeric_limits
+#include <stdexcept>            // invalid_argument
 
 ///////////////////////////// Helper ///////////////////////////////////////////
 
